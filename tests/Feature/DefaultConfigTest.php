@@ -1,6 +1,6 @@
 <?php
 
-test('default config has correct types', function() {
+test('default config has correct types', function () {
     $defaultConfig = \TailwindMerge\Support\Config::getDefaultConfig();
 
     expect($defaultConfig['cacheSize'])->toBe(500);

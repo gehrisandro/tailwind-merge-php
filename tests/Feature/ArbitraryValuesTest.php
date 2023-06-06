@@ -2,7 +2,7 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('handles simple conflicts with arbitrary values correctly', function() {
+test('handles simple conflicts with arbitrary values correctly', function () {
     expect(TailwindMerge::merge('m-[2px] m-[10px]'))->toBe('m-[10px]');
     expect(
         TailwindMerge::merge(
@@ -29,7 +29,7 @@ test('handles simple conflicts with arbitrary values correctly', function() {
     expect(TailwindMerge::merge('text-[0.5px] text-[--my-0]'))->toBe('text-[0.5px] text-[--my-0]');
 });
 
-test('handles arbitrary length conflicts with labels and modifiers correctly', function() {
+test('handles arbitrary length conflicts with labels and modifiers correctly', function () {
     expect(TailwindMerge::merge('hover:m-[2px] hover:m-[length:var(--c)]'))->toBe('hover:m-[length:var(--c)]');
     expect(TailwindMerge::merge('hover:focus:m-[2px] focus:hover:m-[length:var(--c)]'))->toBe(
         'focus:hover:m-[length:var(--c)]',
@@ -45,7 +45,7 @@ test('handles arbitrary length conflicts with labels and modifiers correctly', f
     )->toBe('border-b border-some-coloooor');
 });
 
-test('handles complex arbitrary value conflicts correctly', function() {
+test('handles complex arbitrary value conflicts correctly', function () {
     expect(TailwindMerge::merge('grid-rows-[1fr,auto] grid-rows-2'))->toBe('grid-rows-2');
     expect(TailwindMerge::merge('grid-rows-[repeat(20,minmax(0,1fr))] grid-rows-3'))->toBe('grid-rows-3');
 });

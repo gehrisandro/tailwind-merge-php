@@ -2,10 +2,10 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('prefix working correctly', function() {
-//    const twMerge = extendTailwindMerge({
-//        prefix: 'tw-',
-//    })
+test('prefix working correctly', function () {
+    //    const twMerge = extendTailwindMerge({
+    //        prefix: 'tw-',
+    //    })
 
     expect(TailwindMerge::merge('tw-block tw-hidden'))->toBe('tw-hidden');
     expect(TailwindMerge::merge('block hidden'))->toBe('block hidden');

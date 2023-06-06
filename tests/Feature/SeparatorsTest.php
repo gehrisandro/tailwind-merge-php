@@ -2,10 +2,10 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('single character separator working correctly', function() {
-//    const twMerge = extendTailwindMerge({
-//        separator: '_',
-//    })
+test('single character separator working correctly', function () {
+    //    const twMerge = extendTailwindMerge({
+    //        separator: '_',
+    //    })
 
     expect(TailwindMerge::merge('block hidden'))->toBe('hidden');
 
@@ -19,10 +19,10 @@ test('single character separator working correctly', function() {
     );
 })->todo();
 
-test('multiple character separator working correctly', function() {
-//    const twMerge = extendTailwindMerge({
-//        separator: '__',
-//    })
+test('multiple character separator working correctly', function () {
+    //    const twMerge = extendTailwindMerge({
+    //        separator: '__',
+    //    })
 
     expect(TailwindMerge::merge('block hidden'))->toBe('hidden');
 

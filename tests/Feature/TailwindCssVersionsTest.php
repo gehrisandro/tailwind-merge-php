@@ -2,7 +2,7 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('supports Tailwind CSS v3.3 features', function() {
+test('supports Tailwind CSS v3.3 features', function () {
     expect(TailwindMerge::merge('text-red text-lg/7 text-lg/8'))->toBe('text-red text-lg/8');
     expect(
         TailwindMerge::merge(

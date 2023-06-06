@@ -9,11 +9,13 @@ use TailwindMerge\ValueObjects\ParsedClass;
 
 class TailwindClassParser
 {
-    const CLASS_PART_SEPARATOR = '-';
-    const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
-    const IMPORTANT_MODIFIER = '!';
+    final const CLASS_PART_SEPARATOR = '-';
 
-    private ClassPartObject $classMap;
+    final const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
+
+    final const IMPORTANT_MODIFIER = '!';
+
+    private readonly ClassPartObject $classMap;
 
     public function __construct()
     {
@@ -21,7 +23,7 @@ class TailwindClassParser
     }
 
     /**
-     * @param array<array-key, string> $classParts
+     * @param  array<array-key, string>  $classParts
      */
     private static function getGroupRecursive(array $classParts, ClassPartObject $classPartObject)
     {
@@ -31,7 +33,7 @@ class TailwindClassParser
 
         $currentClassPart = $classParts[0] ?? null;
         $nextClassPartObject = $classPartObject->nextPart[$currentClassPart] ?? null;
-        $classGroupFromNextClassPart = $nextClassPartObject
+        $classGroupFromNextClassPart = $nextClassPartObject !== null
             ? self::getGroupRecursive(array_slice($classParts, 1), $nextClassPartObject)
             : null;
 
@@ -43,10 +45,10 @@ class TailwindClassParser
             return null;
         }
 
-        $classRest = join(self::CLASS_PART_SEPARATOR, $classParts);
+        $classRest = implode(self::CLASS_PART_SEPARATOR, $classParts);
 
-//        collect($classPartObject->validators)->each(fn(ClassValidatorObject $validator) => dump($classRest, $validator, ($validator->validator)($classRest)));
-        return collect($classPartObject->validators)->first(fn(ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
+        //        collect($classPartObject->validators)->each(fn(ClassValidatorObject $validator) => dump($classRest, $validator, ($validator->validator)($classRest)));
+        return collect($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
     }
 
     public function parse(string $class): ParsedClass
@@ -58,29 +60,29 @@ class TailwindClassParser
         $hasPostfixModifier = $maybePostfixModifierPosition !== null;
 
         // TODO
-//        if (!classGroupId) {
-//            if (!maybePostfixModifierPosition) {
-//                return {
-//                    isTailwindClass: false as const,
-//                    originalClassName,
-//                        }
-//                    }
-//
-//            classGroupId = getClassGroupId(baseClassName)
-//
-//                    if (!classGroupId) {
-//                        return {
-//                            isTailwindClass: false as const,
-//                            originalClassName,
-//                        }
-//                    }
-//
-//                    hasPostfixModifier = false
-//                }
+        //        if (!classGroupId) {
+        //            if (!maybePostfixModifierPosition) {
+        //                return {
+        //                    isTailwindClass: false as const,
+        //                    originalClassName,
+        //                        }
+        //                    }
+        //
+        //            classGroupId = getClassGroupId(baseClassName)
+        //
+        //                    if (!classGroupId) {
+        //                        return {
+        //                            isTailwindClass: false as const,
+        //                            originalClassName,
+        //                        }
+        //                    }
+        //
+        //                    hasPostfixModifier = false
+        //                }
 
-        $variantModifier = join(':', $this->sortModifiers($modifiers));
+        $variantModifier = implode(':', $this->sortModifiers($modifiers));
 
-        $modifierId = $hasImportantModifier ? $variantModifier . self::IMPORTANT_MODIFIER : $variantModifier;
+        $modifierId = $hasImportantModifier ? $variantModifier.self::IMPORTANT_MODIFIER : $variantModifier;
 
         return new ParsedClass(
             modifiers: $modifiers,
@@ -107,13 +109,13 @@ class TailwindClassParser
 
     private static function getGroupIdForArbitraryProperty(string $className)
     {
-        if (Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)) {
+        if (Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '' && Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '0') {
             $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)[1] ?? null;
             $property = Str::before($arbitraryPropertyClassName, ':');
 
-            if ($property) {
+            if ($property !== '' && $property !== '0') {
                 // I use two dots here because one dot is used as prefix for class groups in plugins
-                return 'arbitrary..' . $property;
+                return 'arbitrary..'.$property;
             }
         }
 
@@ -145,24 +147,26 @@ class TailwindClassParser
                 ) {
                     $modifiers[] = Str::substr($className, $modifierStart, $index - $modifierStart);
                     $modifierStart = $index + $separatorLength;
+
                     continue;
                 }
 
                 if ($currentCharacter === '/') {
                     $postfixModifierPosition = $index;
+
                     continue;
                 }
             }
 
             if ($currentCharacter === '[') {
                 $bracketDepth++;
-            } else if ($currentCharacter === ']') {
+            } elseif ($currentCharacter === ']') {
                 $bracketDepth--;
             }
         }
 
         $baseClassNameWithImportantModifier =
-            count($modifiers) === 0 ? $className : Str::substr($className, $modifierStart);
+            $modifiers === [] ? $className : Str::substr($className, $modifierStart);
         $hasImportantModifier =
             Str::startsWith($baseClassNameWithImportantModifier, self::IMPORTANT_MODIFIER);
         $baseClassName = $hasImportantModifier

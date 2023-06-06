@@ -267,7 +267,6 @@ test('class map has correct class groups at first part', function () {
     ]);
 });
 
-
 function getClassGroupsInClassPart(ClassPartObject $classPart): array
 {
     $classGroups = [];
@@ -276,11 +275,11 @@ function getClassGroupsInClassPart(ClassPartObject $classPart): array
         $classGroups[] = $classPart->classGroupId;
     }
 
-    foreach($classPart->validators as $validator){
+    foreach ($classPart->validators as $validator) {
         $classGroups[] = $validator->classGroupId;
     }
 
-    foreach($classPart->nextPart as $nextClassPart) {
+    foreach ($classPart->nextPart as $nextClassPart) {
         foreach (getClassGroupsInClassPart($nextClassPart) as $classGroup) {
             $classGroups[] = $classGroup;
         }

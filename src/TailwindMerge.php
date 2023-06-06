@@ -2,7 +2,6 @@
 
 namespace TailwindMerge;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use TailwindMerge\Support\Config;
 use TailwindMerge\Support\TailwindClassParser;
@@ -21,20 +20,20 @@ class TailwindMerge
         return Str::of($input)
             ->trim()
             ->split('/\s+/')
-            ->map(fn(string $class) => $parser->parse($class))
+            ->map(fn (string $class) => $parser->parse($class))
 //            ->dd()
             ->reverse()
             ->map(function (ParsedClass $class) use (&$conflictingClassGroups): ?string {
-                $classId = $class->modifierId . $class->classGroupId;
+                $classId = $class->modifierId.$class->classGroupId;
 
-                if(key_exists($classId, $conflictingClassGroups)){
+                if (array_key_exists($classId, $conflictingClassGroups)) {
                     return null;
                 }
 
                 $conflictingClassGroups[$classId] = true;
 
-                foreach(self::getConflictingClassGroupIds($class->classGroupId, $class->hasPostfixModifier) as $group){
-                    $conflictingClassGroups[$class->modifierId . $group] = true;
+                foreach (self::getConflictingClassGroupIds($class->classGroupId, $class->hasPostfixModifier) as $group) {
+                    $conflictingClassGroups[$class->modifierId.$group] = true;
                 }
 
                 return $class->originalClassName;

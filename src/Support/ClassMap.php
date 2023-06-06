@@ -8,7 +8,7 @@ use TailwindMerge\ValueObjects\ThemeGetter;
 
 class ClassMap
 {
-    const CLASS_PART_SEPARATOR = '-';
+    final const CLASS_PART_SEPARATOR = '-';
 
     public static function create(array $config)
     {
@@ -31,28 +31,28 @@ class ClassMap
 
     private static function getPrefixedClassGroupEntries(array $classGroupEntries, ?string $prefix): array
     {
-        if (!$prefix) {
+        if (! $prefix) {
             return $classGroupEntries;
         }
 
         return collect($classGroupEntries)->map(function ($classGroupEntry) use ($prefix) {
-                $prefixedClassGroup = collect($classGroupEntry[1])->map(function (string $classDefinition) use ($prefix) {
-                        if (is_string($classDefinition)) {
-                            return $prefix . $classDefinition;
-                        }
+            $prefixedClassGroup = collect($classGroupEntry[1])->map(function (string $classDefinition) use ($prefix) {
+                if (is_string($classDefinition)) {
+                    return $prefix.$classDefinition;
+                }
 
-                        // TODO
-//            if (typeof classDefinition === 'object') {
-//            return Object.fromEntries(
-//                    Object.entries(classDefinition).map(([key, value]) => [prefix + key, value]),
-//                )
-//            }
+                // TODO
+                //            if (typeof classDefinition === 'object') {
+                //            return Object.fromEntries(
+                //                    Object.entries(classDefinition).map(([key, value]) => [prefix + key, value]),
+                //                )
+                //            }
 
-                        return $classDefinition;
-                    });
-
-                return [$classGroupEntry[0], $prefixedClassGroup];
+                return $classDefinition;
             });
+
+            return [$classGroupEntry[0], $prefixedClassGroup];
+        });
     }
 
     public static function processClassesRecursively(array $classGroup, ClassPartObject $classPartObject, string $classGroupId, array $theme)
@@ -61,6 +61,7 @@ class ClassMap
             if (is_string($classDefinition)) {
                 $classPartObjectToEdit = $classDefinition === '' ? $classPartObject : self::getPart($classPartObject, $classDefinition);
                 $classPartObjectToEdit->classGroupId = $classGroupId;
+
                 continue;
             }
 
@@ -71,6 +72,7 @@ class ClassMap
                     $classGroupId,
                     $theme,
                 );
+
                 continue;
             }
 
@@ -104,7 +106,7 @@ class ClassMap
         $currentClassPartObject = $classPartObject;
 
         foreach (explode(self::CLASS_PART_SEPARATOR, $path) as $pathPart) {
-            if (!isset($currentClassPartObject->nextPart[$pathPart])) {
+            if (! isset($currentClassPartObject->nextPart[$pathPart])) {
                 $currentClassPartObject->nextPart[$pathPart] = new ClassPartObject();
             }
 

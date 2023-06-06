@@ -2,7 +2,7 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('merges standalone classes from same group correctly', function(){
+test('merges standalone classes from same group correctly', function () {
     expect(TailwindMerge::merge('inline block'))->toBe('block');
     expect(TailwindMerge::merge('hover:block hover:inline'))->toBe('hover:inline');
     expect(TailwindMerge::merge('hover:block hover:block'))->toBe('hover:block');

@@ -2,7 +2,7 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('merges classes from same group correctly', function() {
+test('merges classes from same group correctly', function () {
     expect(TailwindMerge::merge('overflow-x-auto overflow-x-hidden'))->toBe('overflow-x-hidden');
     expect(TailwindMerge::merge('w-full w-fit'))->toBe('w-fit');
     expect(TailwindMerge::merge('overflow-x-auto overflow-x-hidden overflow-x-scroll'))->toBe('overflow-x-scroll');
@@ -14,7 +14,7 @@ test('merges classes from same group correctly', function() {
     )->toBe('hover:overflow-x-auto overflow-x-scroll');
 });
 
-test('merges classes from Font Variant Numeric section correctly', function() {
+test('merges classes from Font Variant Numeric section correctly', function () {
     expect(TailwindMerge::merge('lining-nums tabular-nums diagonal-fractions'))->toBe(
         'lining-nums tabular-nums diagonal-fractions',
     );
