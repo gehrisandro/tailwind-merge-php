@@ -17,7 +17,7 @@ class Config
 
     final const SHADOW_REGEX = '/^-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/';
 
-    public static function getDefaultConfig()
+    public static function getDefaultConfig(): array
     {
         $colors = self::fromTheme('colors');
         $spacing = self::fromTheme('spacing');
@@ -45,12 +45,12 @@ class Config
         $space = self::fromTheme('space');
         $translate = self::fromTheme('translate');
 
-        $getOverscroll = fn () => ['auto', 'contain', 'none'];
-        $getOverflow = fn () => ['auto', 'hidden', 'clip', 'visible', 'scroll'];
-        $getSpacingWithAuto = fn () => ['auto', $spacing];
-        $getLengthWithEmpty = fn () => ['', self::isLength(...)];
-        $getNumberWithAutoAndArbitrary = fn () => ['auto', self::isNumber(...), self::isArbitraryValue(...)];
-        $getPositions = fn () => [
+        $getOverscroll = fn (): array => ['auto', 'contain', 'none'];
+        $getOverflow = fn (): array => ['auto', 'hidden', 'clip', 'visible', 'scroll'];
+        $getSpacingWithAuto = fn (): array => ['auto', $spacing];
+        $getLengthWithEmpty = fn (): array => ['', self::isLength(...)];
+        $getNumberWithAutoAndArbitrary = fn (): array => ['auto', self::isNumber(...), self::isArbitraryValue(...)];
+        $getPositions = fn (): array => [
             'bottom',
             'center',
             'left',
@@ -61,8 +61,8 @@ class Config
             'right-top',
             'top',
         ];
-        $getLineStyles = fn () => ['solid', 'dashed', 'dotted', 'double', 'none'];
-        $getBlendModes = fn () => [
+        $getLineStyles = fn (): array => ['solid', 'dashed', 'dotted', 'double', 'none'];
+        $getBlendModes = fn (): array => [
             'normal',
             'multiply',
             'screen',
@@ -81,11 +81,11 @@ class Config
             'luminosity',
             'plus-lighter',
         ];
-        $getAlign = fn () => ['start', 'end', 'center', 'between', 'around', 'evenly', 'stretch'];
-        $getZeroAndEmpty = fn () => ['', '0', self::isArbitraryValue(...)];
-        $getBreaks = fn () => ['auto', 'avoid', 'all', 'avoid-page', 'page', 'left', 'right', 'column'];
-        $getNumber = fn () => [self::isNumber(...), self::isArbitraryNumber(...)];
-        $getNumberAndArbitrary = fn () => [self::isNumber(...), self::isArbitraryValue(...)];
+        $getAlign = fn (): array => ['start', 'end', 'center', 'between', 'around', 'evenly', 'stretch'];
+        $getZeroAndEmpty = fn (): array => ['', '0', self::isArbitraryValue(...)];
+        $getBreaks = fn (): array => ['auto', 'avoid', 'all', 'avoid-page', 'page', 'left', 'right', 'column'];
+        $getNumber = fn (): array => [self::isNumber(...), self::isArbitraryNumber(...)];
+        $getNumberAndArbitrary = fn (): array => [self::isNumber(...), self::isArbitraryValue(...)];
 
         return [
             'cacheSize' => 500,
@@ -2045,7 +2045,7 @@ class Config
         return new ThemeGetter($key);
     }
 
-    public static function isLength($value)
+    public static function isLength($value): bool
     {
         if (self::isNumber($value)) {
             return true;
@@ -2056,25 +2056,26 @@ class Config
         if (Str::isMatch(self::FRACTION_REGEX, $value)) {
             return true;
         }
+
         return (bool) self::isArbitraryLength($value);
     }
 
-    private static function isNumber($value)
+    private static function isNumber($value): bool
     {
         return is_numeric($value);
     }
 
-    private static function stringLengths()
+    private static function stringLengths(): \Illuminate\Support\Collection
     {
         return collect(['px', 'full', 'screen']);
     }
 
-    public static function isArbitraryLength($value)
+    public static function isArbitraryLength($value): bool
     {
         return self::getIsArbitraryValue($value, 'length', self::isLengthOnly(...));
     }
 
-    private static function isLengthOnly($value)
+    private static function isLengthOnly($value): bool
     {
         return Str::isMatch(self::LENGTH_UNIT_REGEX, $value);
     }
@@ -2099,60 +2100,61 @@ class Config
         return Str::isMatch(self::ARBITRARY_VALUE_REGEX, $value);
     }
 
-    public static function isArbitraryNumber(string $value)
+    public static function isArbitraryNumber(string $value): bool
     {
         return self::getIsArbitraryValue($value, 'number', self::isNumber(...));
     }
 
-    public static function isAny(string $value)
+    public static function isAny(string $value): bool
     {
         return true;
     }
 
-    public static function isTshirtSize(string $value)
+    public static function isTshirtSize(string $value): bool
     {
         return Str::isMatch(self::T_SHIRT_UNIT_REGEX, $value);
     }
 
-    private static function getNumber()
+    private static function getNumber(): array
     {
         return [self::isNumber(...), self::isArbitraryNumber(...)];
     }
 
-    private static function getLengthWithEmpty()
+    private static function getLengthWithEmpty(): array
     {
         return ['', self::isLength(...)];
     }
 
-    private static function getZeroAndEmpty()
+    private static function getZeroAndEmpty(): array
     {
         return ['', '0', self::isArbitraryValue(...)];
     }
 
-    private static function getNumberAndArbitrary()
+    private static function getNumberAndArbitrary(): array
     {
         return [self::isNumber(...), self::isArbitraryValue(...)];
     }
 
-    public static function isPercent(string $value)
+    public static function isPercent(string $value): bool
     {
-        if (!Str::endsWith($value, '%')) {
+        if (! Str::endsWith($value, '%')) {
             return false;
         }
+
         return (bool) self::isNumber(Str::of($value)->substr(0, -1)->toString());
     }
 
-    private static function getSpacingWithAuto($spacing)
+    private static function getSpacingWithAuto($spacing): array
     {
         return ['auto', $spacing];
     }
 
-    private static function getBreaks()
+    private static function getBreaks(): array
     {
         return ['auto', 'avoid', 'all', 'avoid-page', 'page', 'left', 'right', 'column'];
     }
 
-    private static function getPositions()
+    private static function getPositions(): array
     {
         return [
             'bottom',
@@ -2167,80 +2169,81 @@ class Config
         ];
     }
 
-    private static function getOverflow()
+    private static function getOverflow(): array
     {
         return ['auto', 'hidden', 'clip', 'visible', 'scroll'];
     }
 
-    private static function getOverscroll()
+    private static function getOverscroll(): array
     {
         return ['auto', 'contain', 'none'];
     }
 
-    public static function isInteger(string $value)
+    public static function isInteger(string $value): bool
     {
         if (self::isIntegerOnly($value)) {
             return true;
         }
+
         return self::getIsArbitraryValue($value, 'number', self::isIntegerOnly(...));
     }
 
-    private static function isIntegerOnly(string $value)
+    private static function isIntegerOnly(string $value): bool
     {
         return (string) (int) $value === (string) $value;
     }
 
-    private static function getNumberWithAutoAndArbitrary()
+    private static function getNumberWithAutoAndArbitrary(): array
     {
         return ['auto', self::isNumber(...), self::isArbitraryValue(...)];
     }
 
-    private static function getAlign()
+    private static function getAlign(): array
     {
         return ['start', 'end', 'center', 'between', 'around', 'evenly', 'stretch'];
     }
 
-    private static function getLineStyles()
+    private static function getLineStyles(): array
     {
         return ['solid', 'dashed', 'dotted', 'double', 'none'];
     }
 
-    public static function isArbitraryPosition(string $value)
+    public static function isArbitraryPosition(string $value): bool
     {
         return self::getIsArbitraryValue($value, 'position', self::isNever(...));
     }
 
-    public static function isArbitrarySize(string $value)
+    public static function isArbitrarySize(string $value): bool
     {
         return self::getIsArbitraryValue($value, 'size', self::isNever(...));
     }
 
-    public static function isArbitraryUrl(string $value)
+    public static function isArbitraryUrl(string $value): bool
     {
         return self::getIsArbitraryValue($value, 'url', self::isUrl(...));
     }
 
-    public static function isArbitraryShadow(string $value)
+    public static function isArbitraryShadow(string $value): bool
     {
         return self::getIsArbitraryValue($value, '', self::isShadow(...));
     }
 
-    private static function isNever(string $value)
+    private static function isNever(string $value): bool
     {
         return false;
     }
 
-    private static function isUrl(string $value)
+    private static function isUrl(string $value): bool
     {
         return Str::startsWith($value, 'url(');
     }
 
-    private static function isShadow(string $value)
+    private static function isShadow(string $value): bool
     {
         return Str::isMatch(self::SHADOW_REGEX, $value);
     }
 
-    private static function getBlendModes()
+    private static function getBlendModes(): array
     {
         return [
             'normal',

@@ -12,16 +12,20 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/src',
     ]);
 
-//    $rectorConfig->rules([
-//        InlineConstructorDefaultToPropertyRector::class,
-//    ]);
+    $rectorConfig->skip([
+        __DIR__.'/src/Support/Config.php' => \Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector::class,
+    ]);
+
+    //    $rectorConfig->rules([
+    //        InlineConstructorDefaultToPropertyRector::class,
+    //    ]);
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_81,
         SetList::CODE_QUALITY,
-//        SetList::DEAD_CODE, // TODO: Enable when everything is finished
+        //        SetList::DEAD_CODE, // TODO: Enable when everything is finished
         SetList::EARLY_RETURN,
-//        SetList::TYPE_DECLARATION,
-//        SetList::PRIVATIZATION,
+        SetList::TYPE_DECLARATION,
+        //        SetList::PRIVATIZATION,
     ]);
 };

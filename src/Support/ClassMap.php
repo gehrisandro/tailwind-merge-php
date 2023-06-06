@@ -10,7 +10,7 @@ class ClassMap
 {
     final const CLASS_PART_SEPARATOR = '-';
 
-    public static function create(array $config)
+    public static function create(array $config): ClassPartObject
     {
         $theme = $config['theme'];
         $prefix = $config['prefix'] ?? null;
@@ -29,13 +29,13 @@ class ClassMap
         return $classMap;
     }
 
-    private static function getPrefixedClassGroupEntries(array $classGroupEntries, ?string $prefix): array
+    private static function getPrefixedClassGroupEntries(array $classGroupEntries, ?string $prefix): array|\Illuminate\Support\Collection
     {
         if (! $prefix) {
             return $classGroupEntries;
         }
 
-        return collect($classGroupEntries)->map(function ($classGroupEntry) use ($prefix) {
+        return collect($classGroupEntries)->map(function ($classGroupEntry) use ($prefix): array {
             $prefixedClassGroup = collect($classGroupEntry[1])->map(function (string $classDefinition) use ($prefix) {
                 if (is_string($classDefinition)) {
                     return $prefix.$classDefinition;
@@ -55,7 +55,7 @@ class ClassMap
         });
     }
 
-    public static function processClassesRecursively(array $classGroup, ClassPartObject $classPartObject, string $classGroupId, array $theme)
+    public static function processClassesRecursively(array $classGroup, ClassPartObject $classPartObject, string $classGroupId, array $theme): void
     {
         foreach ($classGroup as $classDefinition) {
             if (is_string($classDefinition)) {

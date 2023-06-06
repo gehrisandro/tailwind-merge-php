@@ -107,7 +107,7 @@ class TailwindClassParser
         return self::getGroupRecursive($classParts, $this->classMap) ?: self::getGroupIdForArbitraryProperty($class);
     }
 
-    private static function getGroupIdForArbitraryProperty(string $className)
+    private static function getGroupIdForArbitraryProperty(string $className): string
     {
         if (Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '' && Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '0') {
             $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)[1] ?? null;
@@ -185,6 +185,9 @@ class TailwindClassParser
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     private function sortModifiers(array $modifiers): array
     {
         if (count($modifiers) <= 1) {

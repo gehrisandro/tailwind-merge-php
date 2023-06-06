@@ -20,7 +20,7 @@ class TailwindMerge
         return Str::of($input)
             ->trim()
             ->split('/\s+/')
-            ->map(fn (string $class) => $parser->parse($class))
+            ->map(fn (string $class): \TailwindMerge\ValueObjects\ParsedClass => $parser->parse($class))
 //            ->dd()
             ->reverse()
             ->map(function (ParsedClass $class) use (&$conflictingClassGroups): ?string {
