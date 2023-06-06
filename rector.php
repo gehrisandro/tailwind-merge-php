@@ -26,6 +26,5 @@ return static function (RectorConfig $rectorConfig): void {
         //        SetList::DEAD_CODE, // TODO: Enable when everything is finished
         SetList::EARLY_RETURN,
         SetList::TYPE_DECLARATION,
-        //        SetList::PRIVATIZATION,
     ]);
 };
