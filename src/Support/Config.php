@@ -2047,11 +2047,16 @@ class Config
 
     public static function isLength($value)
     {
-        return
-            self::isNumber($value) ||
-            self::stringLengths()->contains($value) ||
-            Str::isMatch(self::FRACTION_REGEX, $value) ||
-            self::isArbitraryLength($value);
+        if (self::isNumber($value)) {
+            return true;
+        }
+        if (self::stringLengths()->contains($value)) {
+            return true;
+        }
+        if (Str::isMatch(self::FRACTION_REGEX, $value)) {
+            return true;
+        }
+        return (bool) self::isArbitraryLength($value);
     }
 
     private static function isNumber($value)
@@ -2131,7 +2136,10 @@ class Config
 
     public static function isPercent(string $value)
     {
-        return Str::endsWith($value, '%') && self::isNumber(Str::of($value)->substr(0, -1)->toString());
+        if (!Str::endsWith($value, '%')) {
+            return false;
+        }
+        return (bool) self::isNumber(Str::of($value)->substr(0, -1)->toString());
     }
 
     private static function getSpacingWithAuto($spacing)
@@ -2171,7 +2179,10 @@ class Config
 
     public static function isInteger(string $value)
     {
-        return self::isIntegerOnly($value) || self::getIsArbitraryValue($value, 'number', self::isIntegerOnly(...));
+        if (self::isIntegerOnly($value)) {
+            return true;
+        }
+        return self::getIsArbitraryValue($value, 'number', self::isIntegerOnly(...));
     }
 
     private static function isIntegerOnly(string $value)

@@ -47,7 +47,7 @@
     },
     "scripts": {
         "refactor:lint": "pint -v",
-        "refactor:rector": "rector --debug",
+        "refactor:rector": "rector",
         "test:lint": "pint --test -v",
         "test:refactor": "rector --dry-run",
         "test:types": "phpstan analyse --ansi",
