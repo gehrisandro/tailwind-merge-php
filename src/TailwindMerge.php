@@ -9,6 +9,9 @@ use TailwindMerge\ValueObjects\ParsedClass;
 
 class TailwindMerge
 {
+    /**
+     * @param  array<array-key, string|array<array-key, string>>  ...$args
+     */
     public static function merge(...$args): string
     {
         $input = collect($args)->flatten()->join(' ');
@@ -44,7 +47,10 @@ class TailwindMerge
             ->join(' ');
     }
 
-    private static function getConflictingClassGroupIds(string $classGroupId, bool $hasPostfixModifier)
+    /**
+     * @return array<array-key, string>
+     */
+    private static function getConflictingClassGroupIds(string $classGroupId, bool $hasPostfixModifier): array
     {
         $conflicts = Config::getDefaultConfig()['conflictingClassGroups'][$classGroupId] ?? [];
 

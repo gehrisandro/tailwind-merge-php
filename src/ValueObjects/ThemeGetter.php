@@ -9,7 +9,11 @@ class ThemeGetter
     ) {
     }
 
-    public function get(array $theme)
+    /**
+     * @param  array<string, array<string, mixed>>  $theme
+     * @return array<string, mixed>
+     */
+    public function get(array $theme): array
     {
         return $theme[$this->key] ?? [];
     }

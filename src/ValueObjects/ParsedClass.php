@@ -4,6 +4,9 @@ namespace TailwindMerge\ValueObjects;
 
 class ParsedClass
 {
+    /**
+     * @param  array<array-key, string>  $modifiers
+     */
     public function __construct(
         public array $modifiers,
         public bool $hasImportantModifier,

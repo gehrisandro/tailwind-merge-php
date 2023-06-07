@@ -10,10 +10,13 @@ class ClassMap
 {
     final const CLASS_PART_SEPARATOR = '-';
 
+    /**
+     * @param  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}  $config
+     */
     public static function create(array $config): ClassPartObject
     {
         $theme = $config['theme'];
-        $prefix = $config['prefix'] ?? null;
+        $prefix = $config['prefix'];
 
         $classMap = new ClassPartObject();
 
@@ -29,7 +32,11 @@ class ClassMap
         return $classMap;
     }
 
-    private static function getPrefixedClassGroupEntries(array $classGroupEntries, ?string $prefix): array|\Illuminate\Support\Collection
+    /**
+     * @param  array<string, mixed>  $classGroupEntries
+     * @return array<string, mixed>
+     */
+    private static function getPrefixedClassGroupEntries(array $classGroupEntries, ?string $prefix): array
     {
         if (! $prefix) {
             return $classGroupEntries;
@@ -52,7 +59,7 @@ class ClassMap
             });
 
             return [$classGroupEntry[0], $prefixedClassGroup];
-        });
+        })->all();
     }
 
     public static function processClassesRecursively(array $classGroup, ClassPartObject $classPartObject, string $classGroupId, array $theme): void

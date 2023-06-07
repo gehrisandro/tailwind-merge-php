@@ -2,6 +2,7 @@
 
 namespace TailwindMerge\Support;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use TailwindMerge\ValueObjects\ThemeGetter;
 
@@ -17,6 +18,30 @@ class Config
 
     final const SHADOW_REGEX = '/^-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/';
 
+    /**
+     * @var array<string, mixed>
+     */
+    private static array $config = [];
+
+    /**
+     * @return array<string, mixed>
+     */
+    public static function getConfig(): array
+    {
+        return self::$config;
+    }
+
+    /**
+     * @param  array<string, mixed>  $config
+     */
+    public static function setConfig(array $config): void
+    {
+        self::$config = $config;
+    }
+
+    /**
+     * @return  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}
+     */
     public static function getDefaultConfig(): array
     {
         $colors = self::fromTheme('colors');
@@ -45,50 +70,9 @@ class Config
         $space = self::fromTheme('space');
         $translate = self::fromTheme('translate');
 
-        $getOverscroll = fn (): array => ['auto', 'contain', 'none'];
-        $getOverflow = fn (): array => ['auto', 'hidden', 'clip', 'visible', 'scroll'];
-        $getSpacingWithAuto = fn (): array => ['auto', $spacing];
-        $getLengthWithEmpty = fn (): array => ['', self::isLength(...)];
-        $getNumberWithAutoAndArbitrary = fn (): array => ['auto', self::isNumber(...), self::isArbitraryValue(...)];
-        $getPositions = fn (): array => [
-            'bottom',
-            'center',
-            'left',
-            'left-bottom',
-            'left-top',
-            'right',
-            'right-bottom',
-            'right-top',
-            'top',
-        ];
-        $getLineStyles = fn (): array => ['solid', 'dashed', 'dotted', 'double', 'none'];
-        $getBlendModes = fn (): array => [
-            'normal',
-            'multiply',
-            'screen',
-            'overlay',
-            'darken',
-            'lighten',
-            'color-dodge',
-            'color-burn',
-            'hard-light',
-            'soft-light',
-            'difference',
-            'exclusion',
-            'hue',
-            'saturation',
-            'color',
-            'luminosity',
-            'plus-lighter',
-        ];
-        $getAlign = fn (): array => ['start', 'end', 'center', 'between', 'around', 'evenly', 'stretch'];
-        $getZeroAndEmpty = fn (): array => ['', '0', self::isArbitraryValue(...)];
-        $getBreaks = fn (): array => ['auto', 'avoid', 'all', 'avoid-page', 'page', 'left', 'right', 'column'];
-        $getNumber = fn (): array => [self::isNumber(...), self::isArbitraryNumber(...)];
-        $getNumberAndArbitrary = fn (): array => [self::isNumber(...), self::isArbitraryValue(...)];
-
         return [
             'cacheSize' => 500,
+            'prefix' => null,
             'theme' => [
                 'colors' => [self::isAny(...)],
                 'spacing' => [self::isLength(...)],
@@ -2045,7 +2029,7 @@ class Config
         return new ThemeGetter($key);
     }
 
-    public static function isLength($value): bool
+    public static function isLength(string $value): bool
     {
         if (self::isNumber($value)) {
             return true;
@@ -2060,27 +2044,30 @@ class Config
         return (bool) self::isArbitraryLength($value);
     }
 
-    private static function isNumber($value): bool
+    private static function isNumber(string $value): bool
     {
         return is_numeric($value);
     }
 
-    private static function stringLengths(): \Illuminate\Support\Collection
+    /**
+     * @return Collection<int, string>
+     */
+    private static function stringLengths(): Collection
     {
         return collect(['px', 'full', 'screen']);
     }
 
-    public static function isArbitraryLength($value): bool
+    public static function isArbitraryLength(string $value): bool
     {
         return self::getIsArbitraryValue($value, 'length', self::isLengthOnly(...));
     }
 
-    private static function isLengthOnly($value): bool
+    private static function isLengthOnly(string $value): bool
     {
         return Str::isMatch(self::LENGTH_UNIT_REGEX, $value);
     }
 
-    private static function getIsArbitraryValue($value, string $label, $isLengthOnly): bool
+    private static function getIsArbitraryValue(string $value, string $label, callable $isLengthOnly): bool
     {
         preg_match(self::ARBITRARY_VALUE_REGEX, (string) $value, $result);
 
@@ -2115,21 +2102,43 @@ class Config
         return Str::isMatch(self::T_SHIRT_UNIT_REGEX, $value);
     }
 
+    /**
+     * @return array<int, callable>
+     */
     private static function getNumber(): array
     {
-        return [self::isNumber(...), self::isArbitraryNumber(...)];
+        return [
+            self::isNumber(...),
+            self::isArbitraryNumber(...),
+        ];
     }
 
+    /**
+     * @return array<int, string|callable>
+     */
     private static function getLengthWithEmpty(): array
     {
-        return ['', self::isLength(...)];
+        return [
+            '',
+            self::isLength(...),
+        ];
     }
 
+    /**
+     * @return array<int, string|callable>
+     */
     private static function getZeroAndEmpty(): array
     {
-        return ['', '0', self::isArbitraryValue(...)];
+        return [
+            '',
+            '0',
+            self::isArbitraryValue(...),
+        ];
     }
 
+    /**
+     * @return array<int, callable>
+     */
     private static function getNumberAndArbitrary(): array
     {
         return [self::isNumber(...), self::isArbitraryValue(...)];
@@ -2144,16 +2153,37 @@ class Config
         return (bool) self::isNumber(Str::of($value)->substr(0, -1)->toString());
     }
 
-    private static function getSpacingWithAuto($spacing): array
+    /**
+     * @return array<int, string|ThemeGetter>
+     */
+    private static function getSpacingWithAuto(ThemeGetter $spacing): array
     {
-        return ['auto', $spacing];
+        return [
+            'auto',
+            $spacing,
+        ];
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getBreaks(): array
     {
-        return ['auto', 'avoid', 'all', 'avoid-page', 'page', 'left', 'right', 'column'];
+        return [
+            'auto',
+            'avoid',
+            'all',
+            'avoid-page',
+            'page',
+            'left',
+            'right',
+            'column',
+        ];
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getPositions(): array
     {
         return [
@@ -2169,14 +2199,30 @@ class Config
         ];
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getOverflow(): array
     {
-        return ['auto', 'hidden', 'clip', 'visible', 'scroll'];
+        return [
+            'auto',
+            'hidden',
+            'clip',
+            'visible',
+            'scroll',
+        ];
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getOverscroll(): array
     {
-        return ['auto', 'contain', 'none'];
+        return [
+            'auto',
+            'contain',
+            'none',
+        ];
     }
 
     public static function isInteger(string $value): bool
@@ -2190,22 +2236,49 @@ class Config
 
     private static function isIntegerOnly(string $value): bool
     {
-        return (string) (int) $value === (string) $value;
+        return (string) (int) $value === $value;
     }
 
+    /**
+     * @return array<int, string|callable>
+     */
     private static function getNumberWithAutoAndArbitrary(): array
     {
-        return ['auto', self::isNumber(...), self::isArbitraryValue(...)];
+        return [
+            'auto',
+            self::isNumber(...),
+            self::isArbitraryValue(...),
+        ];
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getAlign(): array
     {
-        return ['start', 'end', 'center', 'between', 'around', 'evenly', 'stretch'];
+        return [
+            'start',
+            'end',
+            'center',
+            'between',
+            'around',
+            'evenly',
+            'stretch',
+        ];
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getLineStyles(): array
     {
-        return ['solid', 'dashed', 'dotted', 'double', 'none'];
+        return [
+            'solid',
+            'dashed',
+            'dotted',
+            'double',
+            'none',
+        ];
     }
 
     public static function isArbitraryPosition(string $value): bool
@@ -2243,6 +2316,9 @@ class Config
         return Str::isMatch(self::SHADOW_REGEX, $value);
     }
 
+    /**
+     * @return array<int, string>
+     */
     private static function getBlendModes(): array
     {
         return [

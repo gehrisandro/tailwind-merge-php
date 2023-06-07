@@ -2,6 +2,7 @@
 
 namespace TailwindMerge\Support;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use TailwindMerge\ValueObjects\ClassPartObject;
 use TailwindMerge\ValueObjects\ClassValidatorObject;
@@ -25,7 +26,7 @@ class TailwindClassParser
     /**
      * @param  array<array-key, string>  $classParts
      */
-    private static function getGroupRecursive(array $classParts, ClassPartObject $classPartObject)
+    private static function getGroupRecursive(array $classParts, ClassPartObject $classPartObject): ?string
     {
         if (empty($classParts)) {
             return $classPartObject->classGroupId;
@@ -53,7 +54,12 @@ class TailwindClassParser
 
     public function parse(string $class): ParsedClass
     {
-        [$modifiers, $hasImportantModifier, $baseClassName, $maybePostfixModifierPosition] = $this->splitModifiers($class);
+        [
+            'modifiers' => $modifiers,
+            'hasImportantModifier' => $hasImportantModifier,
+            'baseClassName' => $baseClassName,
+            'maybePostfixModifierPosition' => $maybePostfixModifierPosition
+        ] = $this->splitModifiers($class);
 
         $classGroupId = $this->getClassGroupId($maybePostfixModifierPosition ? Str::substr($baseClassName, 0, $maybePostfixModifierPosition) : $baseClassName);
 
@@ -110,7 +116,7 @@ class TailwindClassParser
     private static function getGroupIdForArbitraryProperty(string $className): string
     {
         if (Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '' && Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '0') {
-            $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)[1] ?? null;
+            $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)[1] ?? '';
             $property = Str::before($arbitraryPropertyClassName, ':');
 
             if ($property !== '' && $property !== '0') {
@@ -123,9 +129,12 @@ class TailwindClassParser
         return $className;
     }
 
+    /**
+     * @return array{modifiers: array<array-key, string>, hasImportantModifier: bool, baseClassName: string, maybePostfixModifierPosition: int|null}
+     */
     private function splitModifiers(string $className): array
     {
-        $separator = ':'; // TODO: read from config
+        $separator = isset(Config::getConfig()['separator']) && is_string(Config::getConfig()['separator']) ? Config::getConfig()['separator'] : ':';
         $isSeparatorSingleCharacter = strlen($separator) === 1;
         $firstSeparatorCharacter = $separator[0];
         $separatorLength = strlen($separator);
@@ -178,15 +187,16 @@ class TailwindClassParser
             : null;
 
         return [
-            $modifiers,
-            $hasImportantModifier,
-            $baseClassName,
-            $maybePostfixModifierPosition,
+            'modifiers' => $modifiers,
+            'hasImportantModifier' => $hasImportantModifier,
+            'baseClassName' => $baseClassName,
+            'maybePostfixModifierPosition' => $maybePostfixModifierPosition,
         ];
     }
 
     /**
-     * @return mixed[]
+     * @param  array<array-key, string>  $modifiers
+     * @return array<array-key, string>
      */
     private function sortModifiers(array $modifiers): array
     {
@@ -194,15 +204,18 @@ class TailwindClassParser
             return $modifiers;
         }
 
-        $sortedModifiers = collect([]);
-        $unsortedModifiers = collect([]);
+        /**
+         * @var Collection<array-key, string> $sortedModifiers
+         */
+        $sortedModifiers = Collection::make();
+        $unsortedModifiers = Collection::make();
 
         foreach ($modifiers as $modifier) {
             $isArbitraryVariant = $modifier[0] === '[';
 
             if ($isArbitraryVariant) {
                 $sortedModifiers = $sortedModifiers->concat([...$unsortedModifiers->sort(), $modifier]);
-                $unsortedModifiers = collect([]);
+                $unsortedModifiers = Collection::make();
             } else {
                 $unsortedModifiers->add($modifier);
             }
@@ -210,6 +223,6 @@ class TailwindClassParser
 
         $sortedModifiers = $sortedModifiers->concat($unsortedModifiers->sort());
 
-        return $sortedModifiers->toArray();
+        return $sortedModifiers->all();
     }
 }
