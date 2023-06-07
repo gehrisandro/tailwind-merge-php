@@ -2,7 +2,10 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('merges classes with per-side border colors correctly', function () {
-    expect(TailwindMerge::merge('border-t-some-blue border-t-other-blue'))->toBe('border-t-other-blue');
-    expect(TailwindMerge::merge('border-t-some-blue border-some-blue'))->toBe('border-some-blue');
-});
+it('merges classes with per-side border colors correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['border-t-some-blue border-t-other-blue', 'border-t-other-blue'],
+    ['border-t-some-blue border-some-blue', 'border-some-blue'],
+]);

@@ -2,27 +2,23 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('handles arbitrary property conflicts correctly', function () {
-    expect(TailwindMerge::merge('[paint-order:markers] [paint-order:normal]'))->toBe('[paint-order:normal]');
-    expect(
-        TailwindMerge::merge('[paint-order:markers] [--my-var:2rem] [paint-order:normal] [--my-var:4px]'),
-    )->toBe('[paint-order:normal] [--my-var:4px]');
-});
+it('handles arbitrary property conflicts correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['[paint-order:markers] [paint-order:normal]', '[paint-order:normal]'],
+    ['[paint-order:markers] [--my-var:2rem] [paint-order:normal] [--my-var:4px]', '[paint-order:normal] [--my-var:4px]'],
+]);
 
-test('handles arbitrary property conflicts with modifiers correctly', function () {
-    expect(TailwindMerge::merge('[paint-order:markers] hover:[paint-order:normal]'))->toBe(
-        '[paint-order:markers] hover:[paint-order:normal]',
-    );
-    expect(TailwindMerge::merge('hover:[paint-order:markers] hover:[paint-order:normal]'))->toBe(
-        'hover:[paint-order:normal]',
-    );
-    expect(TailwindMerge::merge('hover:focus:[paint-order:markers] focus:hover:[paint-order:normal]'))->toBe(
-        'focus:hover:[paint-order:normal]',
-    );
-    expect(
-        TailwindMerge::merge('[paint-order:markers] [paint-order:normal] [--my-var:2rem] lg:[--my-var:4px]'),
-    )->toBe('[paint-order:normal] [--my-var:2rem] lg:[--my-var:4px]');
-});
+it('handles arbitrary property conflicts with modifiers correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['[paint-order:markers] hover:[paint-order:normal]', '[paint-order:markers] hover:[paint-order:normal]'],
+    ['hover:[paint-order:markers] hover:[paint-order:normal]', 'hover:[paint-order:normal]'],
+    ['hover:focus:[paint-order:markers] focus:hover:[paint-order:normal]', 'focus:hover:[paint-order:normal]'],
+    ['[paint-order:markers] [paint-order:normal] [--my-var:2rem] lg:[--my-var:4px]', '[paint-order:normal] [--my-var:2rem] lg:[--my-var:4px]'],
+]);
 
 test('handles complex arbitrary property conflicts correctly', function () {
     expect(TailwindMerge::merge('[-unknown-prop:::123:::] [-unknown-prop:url(https://hi.com)]'))->toBe(
@@ -30,9 +26,10 @@ test('handles complex arbitrary property conflicts correctly', function () {
     );
 });
 
-test('handles important modifier correctly', function () {
-    expect(TailwindMerge::merge('![some:prop] [some:other]'))->toBe('![some:prop] [some:other]');
-    expect(TailwindMerge::merge('![some:prop] [some:other] [some:one] ![some:another]'))->toBe(
-        '[some:one] ![some:another]',
-    );
-});
+it('handles important modifier correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['![some:prop] [some:other]', '![some:prop] [some:other]'],
+    ['![some:prop] [some:other] [some:one] ![some:another]', '[some:one] ![some:another]'],
+]);

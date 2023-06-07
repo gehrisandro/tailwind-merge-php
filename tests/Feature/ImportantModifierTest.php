@@ -2,9 +2,12 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('merges tailwind classes with important modifier correctly', function () {
-    expect(TailwindMerge::merge('!font-medium !font-bold'))->toBe('!font-bold');
-    expect(TailwindMerge::merge('!font-medium !font-bold font-thin'))->toBe('!font-bold font-thin');
-    expect(TailwindMerge::merge('!right-2 !-inset-x-px'))->toBe('!-inset-x-px');
-    expect(TailwindMerge::merge('focus:!inline focus:!block'))->toBe('focus:!block');
-});
+it('merges tailwind classes with important modifier correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['!font-medium !font-bold', '!font-bold'],
+    ['!font-medium !font-bold font-thin', '!font-bold font-thin'],
+    ['!right-2 !-inset-x-px', '!-inset-x-px'],
+    ['focus:!inline focus:!block', 'focus:!block'],
+]);

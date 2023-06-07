@@ -2,25 +2,23 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('merges classes from same group correctly', function () {
-    expect(TailwindMerge::merge('overflow-x-auto overflow-x-hidden'))->toBe('overflow-x-hidden');
-    expect(TailwindMerge::merge('w-full w-fit'))->toBe('w-fit');
-    expect(TailwindMerge::merge('overflow-x-auto overflow-x-hidden overflow-x-scroll'))->toBe('overflow-x-scroll');
-    expect(TailwindMerge::merge('overflow-x-auto hover:overflow-x-hidden overflow-x-scroll'))->toBe(
-        'hover:overflow-x-hidden overflow-x-scroll',
-    );
-    expect(
-        TailwindMerge::merge('overflow-x-auto hover:overflow-x-hidden hover:overflow-x-auto overflow-x-scroll'),
-    )->toBe('hover:overflow-x-auto overflow-x-scroll');
-});
+it('merges classes from same group correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['overflow-x-auto overflow-x-hidden', 'overflow-x-hidden'],
+    ['w-full w-fit', 'w-fit'],
+    ['overflow-x-auto overflow-x-hidden overflow-x-scroll', 'overflow-x-scroll'],
+    ['overflow-x-auto hover:overflow-x-hidden overflow-x-scroll', 'hover:overflow-x-hidden overflow-x-scroll'],
+    ['overflow-x-auto hover:overflow-x-hidden hover:overflow-x-auto overflow-x-scroll', 'hover:overflow-x-auto overflow-x-scroll'],
+]);
 
-test('merges classes from Font Variant Numeric section correctly', function () {
-    expect(TailwindMerge::merge('lining-nums tabular-nums diagonal-fractions'))->toBe(
-        'lining-nums tabular-nums diagonal-fractions',
-    );
-    expect(TailwindMerge::merge('normal-nums tabular-nums diagonal-fractions'))->toBe(
-        'tabular-nums diagonal-fractions',
-    );
-    expect(TailwindMerge::merge('tabular-nums diagonal-fractions normal-nums'))->toBe('normal-nums');
-    expect(TailwindMerge::merge('tabular-nums proportional-nums'))->toBe('proportional-nums');
-});
+it('merges classes from Font Variant Numeric section correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['lining-nums tabular-nums diagonal-fractions', 'lining-nums tabular-nums diagonal-fractions'],
+    ['normal-nums tabular-nums diagonal-fractions', 'tabular-nums diagonal-fractions'],
+    ['tabular-nums diagonal-fractions normal-nums', 'normal-nums'],
+    ['tabular-nums proportional-nums', 'proportional-nums'],
+]);

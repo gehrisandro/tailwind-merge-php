@@ -2,8 +2,11 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('merges non-conflicting classes correctly', function () {
-    expect(TailwindMerge::merge('border-t border-white/10'))->toBe('border-t border-white/10');
-    expect(TailwindMerge::merge('border-t border-white'))->toBe('border-t border-white');
-    expect(TailwindMerge::merge('text-3.5xl text-black'))->toBe('text-3.5xl text-black');
-});
+it('merges non-conflicting classes correctly', function (string $input, string $output) {
+    expect(TailwindMerge::merge($input))
+        ->toBe($output);
+})->with([
+    ['border-t border-white/10', 'border-t border-white/10'],
+    ['border-t border-white', 'border-t border-white'],
+    ['text-3.5xl text-black', 'text-3.5xl text-black'],
+]);
