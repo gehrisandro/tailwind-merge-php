@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('handles color conflicts properly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['bg-grey-5 bg-hotpink', 'bg-hotpink'],

@@ -2,20 +2,19 @@
 
 use TailwindMerge\TailwindMerge;
 
-test('prefix working correctly', function () {
-    //    const twMerge = extendTailwindMerge({
-    //        prefix: 'tw-',
-    //    })
+it('works with a prefix correctly', function (string $input, string $output) {
+    $instance = TailwindMerge::factory()
+        ->withConfiguration([
+            'prefix' => 'tw-',
+        ])->make();
 
-    expect(TailwindMerge::merge('tw-block tw-hidden'))->toBe('tw-hidden');
-    expect(TailwindMerge::merge('block hidden'))->toBe('block hidden');
-
-    expect(TailwindMerge::merge('tw-p-3 tw-p-2'))->toBe('tw-p-2');
-    expect(TailwindMerge::merge('p-3 p-2'))->toBe('p-3 p-2');
-
-    expect(TailwindMerge::merge('!tw-right-0 !tw-inset-0'))->toBe('!tw-inset-0');
-
-    expect(TailwindMerge::merge('hover:focus:!tw-right-0 focus:hover:!tw-inset-0'))->toBe(
-        'focus:hover:!tw-inset-0',
-    );
-})->todo();
+    expect($instance->merge($input))
+        ->toBe($output);
+})->with([
+    ['tw-block tw-hidden', 'tw-hidden'],
+    ['block hidden', 'block hidden'],
+    ['tw-p-3 tw-p-2', 'tw-p-2'],
+    ['p-3 p-2', 'p-3 p-2'],
+    ['!tw-right-0 !tw-inset-0', '!tw-inset-0'],
+    ['hover:focus:!tw-right-0 focus:hover:!tw-inset-0', 'focus:hover:!tw-inset-0'],
+]);

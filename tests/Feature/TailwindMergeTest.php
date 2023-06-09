@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('does basic merges', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['h-10 w-10', 'h-10 w-10'],
@@ -14,9 +14,11 @@ it('does basic merges', function (string $input, string $output) {
     ['outline-black outline-1', 'outline-black outline-1'],
     ['grayscale-0 grayscale-[50%]', 'grayscale-[50%]'],
     ['grow grow-[2]', 'grow-[2]'],
+    ['h-10 lg:h-12 lg:h-20', 'h-10 lg:h-20'],
+    ['text-black dark:text-white dark:text-gray-700', 'text-black dark:text-gray-700']
 ]);
 
 it('does basic merges with multiple parameters', function () {
-    expect(TailwindMerge::merge('grow', [null, false, [['grow-[2]']]]))
+    expect(TailwindMerge::instance()->merge('grow', [null, false, [['grow-[2]']]]))
         ->toBe('grow-[2]');
 });

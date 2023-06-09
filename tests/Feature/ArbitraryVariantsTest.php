@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('basic arbitrary variants', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['[&>*]:underline [&>*]:line-through', '[&>*]:line-through'],
@@ -12,7 +12,7 @@ it('basic arbitrary variants', function (string $input, string $output) {
 ]);
 
 it('arbitrary variants with modifiers', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['dark:lg:hover:[&>*]:underline dark:lg:hover:[&>*]:line-through', 'dark:lg:hover:[&>*]:line-through'],
@@ -22,7 +22,7 @@ it('arbitrary variants with modifiers', function (string $input, string $output)
 ]);
 
 it('arbitrary variants with complex syntax in them', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['[@media_screen{@media(hover:hover)}]:underline [@media_screen{@media(hover:hover)}]:line-through', '[@media_screen{@media(hover:hover)}]:line-through'],
@@ -30,21 +30,21 @@ it('arbitrary variants with complex syntax in them', function (string $input, st
 ]);
 
 test('arbitrary variants with attribute selectors', function () {
-    expect(TailwindMerge::merge('[&[data-open]]:underline [&[data-open]]:line-through'))->toBe(
+    expect(TailwindMerge::instance()->merge('[&[data-open]]:underline [&[data-open]]:line-through'))->toBe(
         '[&[data-open]]:line-through',
     );
 });
 
 test('arbitrary variants with multiple attribute selectors', function () {
     expect(
-        TailwindMerge::merge(
+        TailwindMerge::instance()->merge(
             '[&[data-foo][data-bar]:not([data-baz])]:underline [&[data-foo][data-bar]:not([data-baz])]:line-through',
         ),
     )->toBe('[&[data-foo][data-bar]:not([data-baz])]:line-through');
 });
 
 it('multiple arbitrary variants', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['[&>*]:[&_div]:underline [&>*]:[&_div]:line-through', '[&>*]:[&_div]:line-through'],
@@ -54,7 +54,7 @@ it('multiple arbitrary variants', function (string $input, string $output) {
 ]);
 
 it('arbitrary variants with arbitrary properties', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['[&>*]:[color:red] [&>*]:[color:blue]', '[&>*]:[color:blue]'],

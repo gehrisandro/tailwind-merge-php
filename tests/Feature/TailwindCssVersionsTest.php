@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('supports Tailwind CSS v3.3 features', function (string|array $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['text-red text-lg/7 text-lg/8', 'text-red text-lg/8'],

@@ -18,9 +18,9 @@ class TailwindClassParser
 
     private readonly ClassPartObject $classMap;
 
-    public function __construct()
+    public function __construct(array $configuration)
     {
-        $this->classMap = ClassMap::create(Config::getDefaultConfig());
+        $this->classMap = ClassMap::create($configuration);
     }
 
     /**
@@ -134,7 +134,7 @@ class TailwindClassParser
      */
     private function splitModifiers(string $className): array
     {
-        $separator = isset(Config::getConfig()['separator']) && is_string(Config::getConfig()['separator']) ? Config::getConfig()['separator'] : ':';
+        $separator = isset(Config::getMergedConfig()['separator']) && is_string(Config::getMergedConfig()['separator']) ? Config::getMergedConfig()['separator'] : ':';
         $isSeparatorSingleCharacter = strlen($separator) === 1;
         $firstSeparatorCharacter = $separator[0];
         $separatorLength = strlen($separator);

@@ -9,16 +9,38 @@ use TailwindMerge\ValueObjects\ParsedClass;
 
 class TailwindMerge
 {
+    public static function instance(): self
+    {
+        return self::factory()
+            ->make();
+    }
+
+    /**
+     * Creates a new factory instance
+     */
+    public static function factory(): Factory
+    {
+        return new Factory();
+    }
+
+    /**
+     * @param array<string, mixed> $configuration
+     */
+    public function __construct(
+        private readonly array $configuration
+    ) {
+    }
+
     /**
      * @param  array<array-key, string|array<array-key, string>>  ...$args
      */
-    public static function merge(...$args): string
+    public function merge(...$args): string
     {
         $input = collect($args)->flatten()->join(' ');
 
         $conflictingClassGroups = [];
 
-        $parser = new TailwindClassParser();
+        $parser = new TailwindClassParser($this->configuration);
 
         return Str::of($input)
             ->trim()
@@ -52,10 +74,11 @@ class TailwindMerge
      */
     private static function getConflictingClassGroupIds(string $classGroupId, bool $hasPostfixModifier): array
     {
-        $conflicts = Config::getDefaultConfig()['conflictingClassGroups'][$classGroupId] ?? [];
+        $conflicts = Config::getMergedConfig()['conflictingClassGroups'][$classGroupId] ?? [];
+        //        dump($classGroupId, $conflicts);
 
-        if ($hasPostfixModifier && isset(Config::getDefaultConfig()['conflictingClassGroupModifiers'][$classGroupId])) {
-            return [...$conflicts, ...Config::getDefaultConfig()['conflictingClassGroupModifiers'][$classGroupId]];
+        if ($hasPostfixModifier && isset(Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId])) {
+            return [...$conflicts, ...Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId]];
         }
 
         return $conflicts;

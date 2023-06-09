@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('handles pseudo variants conflicts properly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['empty:p-2 empty:p-3', 'empty:p-3'],
@@ -12,7 +12,7 @@ it('handles pseudo variants conflicts properly', function (string $input, string
 ]);
 
 it('handles pseudo variant group conflicts properly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['group-empty:p-2 group-empty:p-3', 'group-empty:p-3'],

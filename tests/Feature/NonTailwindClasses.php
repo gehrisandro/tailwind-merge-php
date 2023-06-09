@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('does not alter non-tailwind classes', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['non-tailwind-class inline block', 'non-tailwind-class block'],

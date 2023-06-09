@@ -1,3 +1,5 @@
 <?php
 
-test('mergeConfigs has correct behavior')->todo();
+it('merge the config correctly', function () {
+    $config = \TailwindMerge\Support\Config::getMergedConfig();
+})->todo();

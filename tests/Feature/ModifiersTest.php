@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('conflicts across prefix modifiers', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['hover:block hover:inline', 'hover:inline'],
@@ -13,7 +13,7 @@ it('conflicts across prefix modifiers', function (string $input, string $output)
 ]);
 
 it('conflicts across postfix modifiers', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['text-lg/7 text-lg/8', 'text-lg/8'],

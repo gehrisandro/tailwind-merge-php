@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('handles arbitrary property conflicts correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['[paint-order:markers] [paint-order:normal]', '[paint-order:normal]'],
@@ -11,7 +11,7 @@ it('handles arbitrary property conflicts correctly', function (string $input, st
 ]);
 
 it('handles arbitrary property conflicts with modifiers correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['[paint-order:markers] hover:[paint-order:normal]', '[paint-order:markers] hover:[paint-order:normal]'],
@@ -21,13 +21,13 @@ it('handles arbitrary property conflicts with modifiers correctly', function (st
 ]);
 
 test('handles complex arbitrary property conflicts correctly', function () {
-    expect(TailwindMerge::merge('[-unknown-prop:::123:::] [-unknown-prop:url(https://hi.com)]'))->toBe(
+    expect(TailwindMerge::instance()->merge('[-unknown-prop:::123:::] [-unknown-prop:url(https://hi.com)]'))->toBe(
         '[-unknown-prop:url(https://hi.com)]',
     );
 });
 
 it('handles important modifier correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['![some:prop] [some:other]', '![some:prop] [some:other]'],

@@ -25,6 +25,8 @@ class ClassMap
             $prefix,
         );
 
+        //        dd($prefixedClassGroupEntries);
+
         foreach ($prefixedClassGroupEntries as $classGroupId => $classGroup) {
             self::processClassesRecursively($classGroup, $classMap, $classGroupId, $theme);
         }
@@ -42,23 +44,22 @@ class ClassMap
             return $classGroupEntries;
         }
 
-        return collect($classGroupEntries)->map(function ($classGroupEntry) use ($prefix): array {
-            $prefixedClassGroup = collect($classGroupEntry[1])->map(function (string $classDefinition) use ($prefix) {
+        return collect($classGroupEntries)->mapWithKeys(function ($classGroup, $classGroupId) use ($prefix): array {
+            $prefixedClassGroup = collect($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
                 if (is_string($classDefinition)) {
                     return $prefix.$classDefinition;
                 }
 
-                // TODO
-                //            if (typeof classDefinition === 'object') {
-                //            return Object.fromEntries(
-                //                    Object.entries(classDefinition).map(([key, value]) => [prefix + key, value]),
-                //                )
-                //            }
+                if (is_array($classDefinition)) {
+                    return collect($classDefinition)->mapWithKeys(fn (array $value, string $key): array => [$prefix.$key => $value])->all();
+                }
 
-                return $classDefinition;
-            });
+                //                return $classDefinition;
+            })->all();
 
-            return [$classGroupEntry[0], $prefixedClassGroup];
+            //            dd($prefixedClassGroup);
+
+            return [$classGroupId => $prefixedClassGroup];
         })->all();
     }
 

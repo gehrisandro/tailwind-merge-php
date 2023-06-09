@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('merges classes from same group correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['overflow-x-auto overflow-x-hidden', 'overflow-x-hidden'],
@@ -14,7 +14,7 @@ it('merges classes from same group correctly', function (string $input, string $
 ]);
 
 it('merges classes from Font Variant Numeric section correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['lining-nums tabular-nums diagonal-fractions', 'lining-nums tabular-nums diagonal-fractions'],

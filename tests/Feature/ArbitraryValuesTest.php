@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('handles simple conflicts with arbitrary values correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['m-[2px] m-[10px]', 'm-[10px]'],
@@ -24,7 +24,7 @@ it('handles simple conflicts with arbitrary values correctly', function (string 
 ]);
 
 it('handles arbitrary length conflicts with labels and modifiers correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['hover:m-[2px] hover:m-[length:var(--c)]', 'hover:m-[length:var(--c)]'],
@@ -35,7 +35,7 @@ it('handles arbitrary length conflicts with labels and modifiers correctly', fun
 ]);
 
 it('handles complex arbitrary value conflicts correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['grid-rows-[1fr,auto] grid-rows-2', 'grid-rows-2'],

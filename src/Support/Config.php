@@ -21,22 +21,63 @@ class Config
     /**
      * @var array<string, mixed>
      */
-    private static array $config = [];
+    private static array $additionalConfig = [];
 
     /**
      * @return array<string, mixed>
      */
-    public static function getConfig(): array
+    public static function getMergedConfig(): array
     {
-        return self::$config;
+        $config = self::getDefaultConfig();
+
+        foreach (self::$additionalConfig as $key => $additionalConfig) {
+            $config[$key] = self::mergePropertyRecursively($config, $key, $additionalConfig);
+        }
+
+        return $config;
+    }
+
+    private static function mergePropertyRecursively(array $baseConfig, string $mergeKey, $mergeValue)
+    {
+        //        dump($mergeKey, $mergeValue);
+        if (! array_key_exists($mergeKey, $baseConfig)) {
+            return $mergeValue;
+        }
+        if (is_string($mergeValue)) {
+            return $mergeValue;
+        }
+        if (is_numeric($mergeValue)) {
+            return $mergeValue;
+        }
+        if (is_bool($mergeValue)) {
+            return $mergeValue;
+        }
+        if ($mergeValue === null) {
+            return $mergeValue;
+        }
+        if (is_array($mergeValue) && array_is_list($mergeValue) && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey])) {
+            return [...$baseConfig[$mergeKey], ...$mergeValue];
+        }
+
+        if (is_array($mergeValue) && ! array_is_list($mergeValue) /* && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey]) */) {
+            if ($baseConfig[$mergeKey] === null) {
+                return $mergeValue;
+            }
+
+            foreach ($mergeValue as $key => $value) {
+                $baseConfig[$mergeKey][$key] = self::mergePropertyRecursively($baseConfig[$mergeKey], $key, $value);
+            }
+        }
+
+        return $baseConfig[$mergeKey];
     }
 
     /**
      * @param  array<string, mixed>  $config
      */
-    public static function setConfig(array $config): void
+    public static function setAdditionalConfig(array $config): void
     {
-        self::$config = $config;
+        self::$additionalConfig = $config;
     }
 
     /**

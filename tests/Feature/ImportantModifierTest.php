@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('merges tailwind classes with important modifier correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['!font-medium !font-bold', '!font-bold'],

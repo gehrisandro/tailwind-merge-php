@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('handles negative value conflicts correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['-m-2 -m-5', '-m-5'],
@@ -11,7 +11,7 @@ it('handles negative value conflicts correctly', function (string $input, string
 ]);
 
 it('handles conflicts between positive and negative values correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['-m-2 m-auto', 'm-auto'],
@@ -19,7 +19,7 @@ it('handles conflicts between positive and negative values correctly', function 
 ]);
 
 it('handles conflicts across groups with negative values correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['-right-1 inset-x-1', 'inset-x-1'],

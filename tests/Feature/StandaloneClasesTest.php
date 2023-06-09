@@ -3,7 +3,7 @@
 use TailwindMerge\TailwindMerge;
 
 it('merges standalone classes from same group correctly', function (string $input, string $output) {
-    expect(TailwindMerge::merge($input))
+    expect(TailwindMerge::instance()->merge($input))
         ->toBe($output);
 })->with([
     ['inline block', 'block'],

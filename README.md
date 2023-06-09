@@ -11,6 +11,7 @@
 ------
 **TailwindMerge for PHP** is a ... If you or your business relies on this package, it's important to support the developers who have contributed their time and effort to create and maintain this valuable tool:
 
+If you find this package helpful, please consider sponsoring the maintainer:
 - Sandro Gehri: **[github.com/sponsors/gehrisandro](https://github.com/sponsors/gehrisandro)**
 
 ## Table of Contents

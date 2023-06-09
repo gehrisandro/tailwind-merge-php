@@ -10,8 +10,8 @@ test('theme scale can be extended', function () {
     //        },
     //    })
 
-    expect(TailwindMerge::merge('p-3 p-my-space p-my-margin'))->toBe('p-my-space p-my-margin');
-    expect(TailwindMerge::merge('m-3 m-my-space m-my-margin'))->toBe('m-my-margin');
+    expect(TailwindMerge::instance()->merge('p-3 p-my-space p-my-margin'))->toBe('p-my-space p-my-margin');
+    expect(TailwindMerge::instance()->merge('m-3 m-my-space m-my-margin'))->toBe('m-my-margin');
 })->todo();
 
 test('theme object can be extended', function () {
@@ -24,6 +24,6 @@ test('theme object can be extended', function () {
     //        },
     //    })
 
-    expect(TailwindMerge::merge('p-3 p-hello p-hallo'))->toBe('p-3 p-hello p-hallo');
-    expect(TailwindMerge::merge('px-3 px-hello px-hallo'))->toBe('px-hallo');
+    expect(TailwindMerge::instance()->merge('p-3 p-hello p-hallo'))->toBe('p-3 p-hello p-hallo');
+    expect(TailwindMerge::instance()->merge('px-3 px-hello px-hallo'))->toBe('px-hallo');
 })->todo();
