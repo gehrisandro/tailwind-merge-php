@@ -20,6 +20,8 @@ Supports Tailwind v3.0 up to v3.3.
 > Star this repository or follow me on [Twitter](https://twitter.com/gehrisandro) to get notified when the package is released.
 
 
+> If you are using **Laravel**, you can use the [TailwindMerge for Laravel](https://github.com/gehrisandro/tailwind-merge-laravel)
+
 ## Table of Contents
 - [Get Started](#get-started)
 - [Usage](#usage)
