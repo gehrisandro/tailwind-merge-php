@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/sandrogehri/tailwind-merge-php/main/art/example.png" width="600" alt="Tailwind Merge for PHP">
+    <img src="https://raw.githubusercontent.com/gehrisandro/tailwind-merge-php/main/art/example.png" width="600" alt="Tailwind Merge for PHP">
     <p align="center">
         <a href="https://github.com/sandrogehri/tailwind-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/sandrogehri/tailwind-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
         <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/sandrogehri/tailwind-merge-php"></a>
@@ -34,7 +34,7 @@ Supports Tailwind v3.0 up to v3.3.
 First, install TailwindMerge via the [Composer](https://getcomposer.org/) package manager:
 
 ```bash
-composer require sandrogehri/tailwind-merge-php
+composer require gehrisandro/tailwind-merge-php
 ```
 
 Then, use the `TailwindMerge` class to merge your Tailwind CSS classes:
