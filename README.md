@@ -1,10 +1,10 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/gehrisandro/tailwind-merge-php/main/art/example.png" width="600" alt="Tailwind Merge for PHP">
     <p align="center">
-        <a href="https://github.com/sandrogehri/tailwind-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/sandrogehri/tailwind-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
-        <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/sandrogehri/tailwind-merge-php"></a>
-        <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/sandrogehri/tailwind-merge-php"></a>
-        <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="License" src="https://img.shields.io/github/license/sandrogehri/tailwind-merge-php"></a>
+        <a href="https://github.com/gehrisandro/tailwind-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/gehrisandro/tailwind-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
+        <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/gehrisandro/tailwind-merge-php"></a>
+        <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/gehrisandro/tailwind-merge-php"></a>
+        <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="License" src="https://img.shields.io/github/license/gehrisandro/tailwind-merge-php"></a>
     </p>
 </p>
 
