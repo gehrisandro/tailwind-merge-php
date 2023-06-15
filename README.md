@@ -1,21 +1,36 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/sandrogehri/tailwind-merge-php/main/art/example.png" width="600" alt="Tailwind Merge for PHP">
+    <img src="https://raw.githubusercontent.com/gehrisandro/tailwind-merge-php/main/art/example.png" width="600" alt="Tailwind Merge for PHP">
     <p align="center">
-        <a href="https://github.com/sandrogehri/tailwind-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/sandrogehri/tailwind-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
-        <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/sandrogehri/tailwind-merge-php"></a>
-        <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/sandrogehri/tailwind-merge-php"></a>
-        <a href="https://packagist.org/packages/sandrogehri/tailwind-merge-php"><img alt="License" src="https://img.shields.io/github/license/sandrogehri/tailwind-merge-php"></a>
+        <a href="https://github.com/gehrisandro/tailwind-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/gehrisandro/tailwind-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
+        <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/gehrisandro/tailwind-merge-php"></a>
+        <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/gehrisandro/tailwind-merge-php"></a>
+        <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="License" src="https://img.shields.io/github/license/gehrisandro/tailwind-merge-php"></a>
     </p>
 </p>
 
 ------
-**TailwindMerge for PHP** is a ... If you or your business relies on this package, it's important to support the developers who have contributed their time and effort to create and maintain this valuable tool:
+
+**Tailwind CSS Merge for PHP** is a PHP package that allows you to merge multiple Tailwind CSS classes by automatically resolving conflicts between classes by removing classes conflicting with a class defined later. \
+Essentially, a PHP port of [tailwind-merge](https://github.com/dcastil/tailwind-merge) by [dcastil](https://github.com/dcastil).
+
+Supports Tailwind v3.0 up to v3.3.
 
 If you find this package helpful, please consider sponsoring the maintainer:
 - Sandro Gehri: **[github.com/sponsors/gehrisandro](https://github.com/sponsors/gehrisandro)**
 
+> **Attention:** This package is still in development and not ready for production use. \
+> At the moment only this README is publicly available. The package will be released soon.
+> Star this repository or follow me on [Twitter](https://twitter.com/gehrisandro) to get notified when the package is released.
+
+
+> If you are using **Laravel**, you can use the [TailwindMerge for Laravel](https://github.com/gehrisandro/tailwind-merge-laravel)
+
 ## Table of Contents
 - [Get Started](#get-started)
+- [Usage](#usage)
+- [Configuration](#configuration)
+  - [Custom Tailwind Config](#custom-tailwind-config)
+- [Contributing](#contributing)
 
 ## Get Started
 
@@ -24,8 +39,86 @@ If you find this package helpful, please consider sponsoring the maintainer:
 First, install TailwindMerge via the [Composer](https://getcomposer.org/) package manager:
 
 ```bash
-composer require sandrogehri/tailwind-merge-php
+composer require gehrisandro/tailwind-merge-php
 ```
+
+Then, use the `TailwindMerge` class to merge your Tailwind CSS classes:
+
+```php
+$tw = TailwindMerge\TailwindMerge::instance();
+
+$tw->merge('text-red-500', 'text-blue-500'); // 'text-blue-500'
+```
+
+You can adjust the configuration of `TailwindMerge` by using the factory to create a new instance:
+
+```php
+$instance = TailwindMerge::factory()
+    ->withConfiguration([
+        'prefix' => 'tw-',
+    ])->make();
+
+$instance->merge('tw-text-red-500', 'tw-text-blue-500'); // 'tw-text-blue-500'
+```
+
+For more information on how to configure `TailwindMerge`, see the [Configuration](#configuration) section.
+
+## Usage
+
+`TailwindMerge` is not only capable of resolving conflicts between basic Tailwind CSS classes, but also handles more complex scenarios:
+
+```php
+$tw = TailwindMerge\TailwindMerge::instance();
+
+// conflicting classes
+$tw->merge('block inline'); // inline
+$tw->merge('pl-4 px-6'); // px-6
+
+// non-conflicting classes
+$tw->merge('text-xl text-black'); // text-xl text-black
+
+// with breakpoints
+$tw->merge('h-10 lg:h-12 lg:h-20'); // h-10 lg:h-20
+
+// dark mode
+$tw->merge('text-black dark:text-white dark:text-gray-700'); // text-black dark:text-gray-700
+
+// with hover, focus and other states
+$tw->merge('hover:block hover:inline'); // hover:inline
+
+// with the important modifier
+$tw->merge('!font-medium !font-bold'); // !font-bold
+
+// arbitrary values
+$tw->merge('z-10 z-[999]'); // z-[999] 
+
+// arbitrary variants
+$tw->merge('[&>*]:underline [&>*]:line-through'); // [&>*]:line-through
+
+// non tailwind classes
+$tw->merge('non-tailwind-class block inline'); // non-tailwind-class inline
+```
+
+It's possible to pass the classes as a string, an array or a combination of both:
+
+```php
+$tw->merge('h-10 h-20'); // h-20
+$tw->merge(['h-10', 'h-20']); // h-20
+$tw->merge(['h-10', 'h-20'], 'h-30'); // h-30
+$tw->merge(['h-10', 'h-20'], 'h-30', ['h-40']); // h-40
+```
+
+## Configuration
+
+> **Note:** To be documented
+
+### Custom Tailwind Config
+
+> **Note:** To be documented
+
+## Contributing
+
+Thank you for considering contributing to `Tailwind Merge for PHP`! The contribution guide can be found in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ---
 
