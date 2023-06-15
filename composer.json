@@ -1,7 +1,7 @@
 {
-    "name": "sandrogehri/tailwind-merge-php",
-    "description": "TailwindMerge for PHP is a ...",
-    "keywords": ["php", "tailwindcss"],
+    "name": "gehrisandro/tailwind-merge-php",
+    "description": "TailwindMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
+    "keywords": ["php", "tailwindcss", "merge", "classes"],
     "license": "MIT",
     "authors": [
         {
