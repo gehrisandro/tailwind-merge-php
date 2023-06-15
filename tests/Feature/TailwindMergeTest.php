@@ -15,7 +15,7 @@ it('does basic merges', function (string $input, string $output) {
     ['grayscale-0 grayscale-[50%]', 'grayscale-[50%]'],
     ['grow grow-[2]', 'grow-[2]'],
     ['h-10 lg:h-12 lg:h-20', 'h-10 lg:h-20'],
-    ['text-black dark:text-white dark:text-gray-700', 'text-black dark:text-gray-700']
+    ['text-black dark:text-white dark:text-gray-700', 'text-black dark:text-gray-700'],
 ]);
 
 it('does basic merges with multiple parameters', function () {

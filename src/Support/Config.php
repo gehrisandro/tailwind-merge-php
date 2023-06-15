@@ -37,9 +37,8 @@ class Config
         return $config;
     }
 
-    private static function mergePropertyRecursively(array $baseConfig, string $mergeKey, $mergeValue)
+    private static function mergePropertyRecursively(array $baseConfig, string $mergeKey, array|bool|float|int|string|null $mergeValue): array|bool|float|int|string|null
     {
-        //        dump($mergeKey, $mergeValue);
         if (! array_key_exists($mergeKey, $baseConfig)) {
             return $mergeValue;
         }

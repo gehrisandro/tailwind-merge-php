@@ -24,7 +24,7 @@ class TailwindMerge
     }
 
     /**
-     * @param array<string, mixed> $configuration
+     * @param  array<string, mixed>  $configuration
      */
     public function __construct(
         private readonly array $configuration
@@ -46,7 +46,6 @@ class TailwindMerge
             ->trim()
             ->split('/\s+/')
             ->map(fn (string $class): ParsedClass => $parser->parse($class))
-//            ->dd()
             ->reverse()
             ->map(function (ParsedClass $class) use (&$conflictingClassGroups): ?string {
                 $classId = $class->modifierId.$class->classGroupId;
@@ -64,7 +63,6 @@ class TailwindMerge
                 return $class->originalClassName;
             })
             ->reverse()
-//            ->dd()
             ->filter()
             ->join(' ');
     }
@@ -75,7 +73,6 @@ class TailwindMerge
     private static function getConflictingClassGroupIds(string $classGroupId, bool $hasPostfixModifier): array
     {
         $conflicts = Config::getMergedConfig()['conflictingClassGroups'][$classGroupId] ?? [];
-        //        dump($classGroupId, $conflicts);
 
         if ($hasPostfixModifier && isset(Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId])) {
             return [...$conflicts, ...Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId]];

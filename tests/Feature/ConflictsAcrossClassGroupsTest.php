@@ -15,7 +15,7 @@ it('handles conflicts across class groups correctly', function (string $input, s
     ['inset-x-1 right-1 inset-y-1', 'inset-x-1 right-1 inset-y-1'],
     ['right-1 inset-x-1 inset-y-1', 'inset-x-1 inset-y-1'],
     ['inset-x-1 hover:left-1 inset-1', 'hover:left-1 inset-1'],
-    ['pl-4 px-6', 'px-6']
+    ['pl-4 px-6', 'px-6'],
 ]);
 
 it('ring and shadow classes do not create conflict', function (string $input, string $output) {

@@ -18,6 +18,9 @@ class TailwindClassParser
 
     private readonly ClassPartObject $classMap;
 
+    /**
+     * @param  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}  $config
+     */
     public function __construct(array $configuration)
     {
         $this->classMap = ClassMap::create($configuration);
@@ -48,7 +51,6 @@ class TailwindClassParser
 
         $classRest = implode(self::CLASS_PART_SEPARATOR, $classParts);
 
-        //        collect($classPartObject->validators)->each(fn(ClassValidatorObject $validator) => dump($classRest, $validator, ($validator->validator)($classRest)));
         return collect($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
     }
 

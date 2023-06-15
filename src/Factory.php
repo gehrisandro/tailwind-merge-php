@@ -6,12 +6,15 @@ use TailwindMerge\Support\Config;
 
 final class Factory
 {
+    /**
+     * @var array<string, mixed>
+     */
     private array $additionalConfiguration = [];
 
     /**
      * Override the default configuration.
      *
-     * @param  mixed[]  $configuration
+     * @param  array<string, mixed>  $configuration
      */
     public function withConfiguration(array $configuration): self
     {
@@ -27,7 +30,6 @@ final class Factory
     {
         Config::setAdditionalConfig($this->additionalConfiguration);
         $config = Config::getMergedConfig();
-        //        dd($config['conflictingClassGroups']);
 
         return new TailwindMerge($config);
     }

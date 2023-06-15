@@ -25,8 +25,6 @@ class ClassMap
             $prefix,
         );
 
-        //        dd($prefixedClassGroupEntries);
-
         foreach ($prefixedClassGroupEntries as $classGroupId => $classGroup) {
             self::processClassesRecursively($classGroup, $classMap, $classGroupId, $theme);
         }
@@ -44,7 +42,7 @@ class ClassMap
             return $classGroupEntries;
         }
 
-        return collect($classGroupEntries)->mapWithKeys(function ($classGroup, $classGroupId) use ($prefix): array {
+        return collect($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
             $prefixedClassGroup = collect($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
                 if (is_string($classDefinition)) {
                     return $prefix.$classDefinition;
@@ -56,8 +54,6 @@ class ClassMap
 
                 //                return $classDefinition;
             })->all();
-
-            //            dd($prefixedClassGroup);
 
             return [$classGroupId => $prefixedClassGroup];
         })->all();
@@ -104,7 +100,7 @@ class ClassMap
         }
     }
 
-    private static function isThemeGetter($classDefinition): bool
+    private static function isThemeGetter(ThemeGetter|array|callable $classDefinition): bool
     {
         return $classDefinition instanceof ThemeGetter;
     }
