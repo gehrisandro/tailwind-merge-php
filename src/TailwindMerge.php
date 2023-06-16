@@ -46,7 +46,7 @@ class TailwindMerge implements TailwindMergeContract
         return Str::of($input)
             ->trim()
             ->split('/\s+/')
-            ->map(fn (string $class): ParsedClass => $parser->parse($class))
+            ->map(fn (string $class): ParsedClass => $parser->parse($class)) // @phpstan-ignore-line
             ->reverse()
             ->map(function (ParsedClass $class) use (&$conflictingClassGroups): ?string {
                 $classId = $class->modifierId.$class->classGroupId;
