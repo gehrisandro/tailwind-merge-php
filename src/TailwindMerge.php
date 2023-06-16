@@ -2,9 +2,9 @@
 
 namespace TailwindMerge;
 
-use Illuminate\Support\Str;
 use TailwindMerge\Contracts\TailwindMergeContract;
 use TailwindMerge\Support\Config;
+use TailwindMerge\Support\Str;
 use TailwindMerge\Support\TailwindClassParser;
 use TailwindMerge\ValueObjects\ParsedClass;
 

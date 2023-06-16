@@ -3,7 +3,6 @@
 namespace TailwindMerge\Support;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use TailwindMerge\ValueObjects\ThemeGetter;
 
 class Config
@@ -2077,7 +2076,7 @@ class Config
         if (self::stringLengths()->contains($value)) {
             return true;
         }
-        if (Str::isMatch(self::FRACTION_REGEX, $value)) {
+        if (Str::hasMatch(self::FRACTION_REGEX, $value)) {
             return true;
         }
 
@@ -2104,7 +2103,7 @@ class Config
 
     private static function isLengthOnly(string $value): bool
     {
-        return Str::isMatch(self::LENGTH_UNIT_REGEX, $value);
+        return Str::hasMatch(self::LENGTH_UNIT_REGEX, $value);
     }
 
     private static function getIsArbitraryValue(string $value, string $label, callable $isLengthOnly): bool
@@ -2124,7 +2123,7 @@ class Config
 
     public static function isArbitraryValue(string $value): bool
     {
-        return Str::isMatch(self::ARBITRARY_VALUE_REGEX, $value);
+        return Str::hasMatch(self::ARBITRARY_VALUE_REGEX, $value);
     }
 
     public static function isArbitraryNumber(string $value): bool
@@ -2139,7 +2138,7 @@ class Config
 
     public static function isTshirtSize(string $value): bool
     {
-        return Str::isMatch(self::T_SHIRT_UNIT_REGEX, $value);
+        return Str::hasMatch(self::T_SHIRT_UNIT_REGEX, $value);
     }
 
     /**
@@ -2353,7 +2352,7 @@ class Config
 
     private static function isShadow(string $value): bool
     {
-        return Str::isMatch(self::SHADOW_REGEX, $value);
+        return Str::hasMatch(self::SHADOW_REGEX, $value);
     }
 
     /**

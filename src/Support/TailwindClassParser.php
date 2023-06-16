@@ -3,7 +3,6 @@
 namespace TailwindMerge\Support;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use TailwindMerge\ValueObjects\ClassPartObject;
 use TailwindMerge\ValueObjects\ClassValidatorObject;
 use TailwindMerge\ValueObjects\ParsedClass;
