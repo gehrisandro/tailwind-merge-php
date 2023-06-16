@@ -1,0 +1,65 @@
+{
+    "name": "gehrisandro/tailwind-merge-php",
+    "description": "TailwindMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
+    "keywords": ["php", "tailwindcss", "merge", "classes"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sandro Gehri",
+            "email": "sandrogehri@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1.0",
+        "illuminate/support": "^10.13"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.10.0",
+        "nunomaduro/collision": "^7.5.2",
+        "pestphp/pest": "dev-develop as 2.6.2",
+        "pestphp/pest-plugin-arch": "^2.1.2",
+        "pestphp/pest-plugin-mock": "^2.0.0",
+        "pestphp/pest-plugin-type-coverage": "^2.0.0",
+        "phpstan/phpstan": "^1.10.15",
+        "rector/rector": "^0.14.8",
+        "symfony/var-dumper": "^6.2.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "TailwindMerge\\": "src/"
+        },
+        "files": [
+            "src/TailwindMerge.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "refactor:lint": "pint -v",
+        "refactor:rector": "rector",
+        "test:lint": "pint --test -v",
+        "test:refactor": "rector --dry-run",
+        "test:types": "phpstan analyse --ansi",
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:pest": "pest --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:refactor",
+            "@test:types",
+            "@test:type-coverage",
+            "@test:pest"
+        ]
+    }
+}
