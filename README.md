@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/gehrisandro/tailwind-merge-php/main/art/example.png" width="600" alt="Tailwind Merge for PHP">
+    <img src="https://raw.githubusercontent.com/gehrisandro/tailwind-merge-php/main/art/example.png" width="600" alt="TailwindMerge for PHP">
     <p align="center">
         <a href="https://github.com/gehrisandro/tailwind-merge-php/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/gehrisandro/tailwind-merge-php/tests.yml?branch=main&label=tests&style=round-square"></a>
         <a href="https://packagist.org/packages/gehrisandro/tailwind-merge-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/gehrisandro/tailwind-merge-php"></a>
@@ -10,8 +10,9 @@
 
 ------
 
-**Tailwind CSS Merge for PHP** is a PHP package that allows you to merge multiple Tailwind CSS classes by automatically resolving conflicts between classes by removing classes conflicting with a class defined later. \
-Essentially, a PHP port of [tailwind-merge](https://github.com/dcastil/tailwind-merge) by [dcastil](https://github.com/dcastil).
+**TailwindMerge for PHP** allows you to merge multiple [Tailwind CSS](https://tailwindcss.com/) classes and automatically resolves conflicts between classes by removing classes conflicting with a class defined later.
+
+A PHP port of [tailwind-merge](https://github.com/dcastil/tailwind-merge) by [dcastil](https://github.com/dcastil).
 
 Supports Tailwind v3.0 up to v3.3.
 
@@ -42,7 +43,9 @@ composer require gehrisandro/tailwind-merge-php
 Then, use the `TailwindMerge` class to merge your Tailwind CSS classes:
 
 ```php
-$tw = TailwindMerge\TailwindMerge::instance();
+use TailwindMerge\TailwindMerge;
+
+$tw = TailwindMerge::instance();
 
 $tw->merge('text-red-500', 'text-blue-500'); // 'text-blue-500'
 ```
@@ -50,6 +53,8 @@ $tw->merge('text-red-500', 'text-blue-500'); // 'text-blue-500'
 You can adjust the configuration of `TailwindMerge` by using the factory to create a new instance:
 
 ```php
+use TailwindMerge\TailwindMerge;
+
 $instance = TailwindMerge::factory()
     ->withConfiguration([
         'prefix' => 'tw-',
@@ -65,7 +70,9 @@ For more information on how to configure `TailwindMerge`, see the [Configuration
 `TailwindMerge` is not only capable of resolving conflicts between basic Tailwind CSS classes, but also handles more complex scenarios:
 
 ```php
-$tw = TailwindMerge\TailwindMerge::instance();
+use TailwindMerge\TailwindMerge;
+
+$tw = TailwindMerge::instance();
 
 // conflicting classes
 $tw->merge('block inline'); // inline
@@ -107,15 +114,15 @@ $tw->merge(['h-10', 'h-20'], 'h-30', ['h-40']); // h-40
 
 ## Configuration
 
-> **Note:** To be documented
+> **Note:** To do
 
 ### Custom Tailwind Config
 
-> **Note:** To be documented
+> **Note:** To do
 
 ## Contributing
 
-Thank you for considering contributing to `Tailwind Merge for PHP`! The contribution guide can be found in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+Thank you for considering contributing to `TailwindMerge for PHP`! The contribution guide can be found in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ---
 

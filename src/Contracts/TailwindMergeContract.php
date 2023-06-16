@@ -2,8 +2,6 @@
 
 namespace TailwindMerge\Contracts;
 
-use TailwindMerge\TailwindMerge;
-
 interface TailwindMergeContract
 {
     /**
