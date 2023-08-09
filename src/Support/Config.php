@@ -411,7 +411,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/grid-column
                  */
-                'col-start-end' => [['col' => ['auto', ['span' => [IntegerValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
+                'col-start-end' => [['col' => ['auto', ['span' => ['full', IntegerValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Grid Column Start
                  *

@@ -11,6 +11,7 @@ it('merges classes from same group correctly', function (string $input, string $
     ['overflow-x-auto overflow-x-hidden overflow-x-scroll', 'overflow-x-scroll'],
     ['overflow-x-auto hover:overflow-x-hidden overflow-x-scroll', 'hover:overflow-x-hidden overflow-x-scroll'],
     ['overflow-x-auto hover:overflow-x-hidden hover:overflow-x-auto overflow-x-scroll', 'hover:overflow-x-auto overflow-x-scroll'],
+    ['col-span-1 col-span-full', 'col-span-full'],
 ]);
 
 it('merges classes from Font Variant Numeric section correctly', function (string $input, string $output) {
