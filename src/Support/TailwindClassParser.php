@@ -2,7 +2,6 @@
 
 namespace TailwindMerge\Support;
 
-use Illuminate\Support\Collection;
 use TailwindMerge\ValueObjects\ClassPartObject;
 use TailwindMerge\ValueObjects\ClassValidatorObject;
 use TailwindMerge\ValueObjects\ParsedClass;
@@ -50,7 +49,7 @@ class TailwindClassParser
 
         $classRest = implode(self::CLASS_PART_SEPARATOR, $classParts);
 
-        return collect($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
+        return Collection::make($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
     }
 
     public function parse(string $class): ParsedClass
@@ -215,7 +214,7 @@ class TailwindClassParser
             $isArbitraryVariant = $modifier[0] === '[';
 
             if ($isArbitraryVariant) {
-                $sortedModifiers = $sortedModifiers->concat([...$unsortedModifiers->sort(), $modifier]);
+                $sortedModifiers = $sortedModifiers->concat([...$unsortedModifiers->sort()->all(), $modifier]);
                 $unsortedModifiers = Collection::make();
             } else {
                 $unsortedModifiers->add($modifier);

@@ -3,6 +3,7 @@
 namespace TailwindMerge;
 
 use TailwindMerge\Contracts\TailwindMergeContract;
+use TailwindMerge\Support\Collection;
 use TailwindMerge\Support\Config;
 use TailwindMerge\Support\Str;
 use TailwindMerge\Support\TailwindClassParser;
@@ -37,7 +38,7 @@ class TailwindMerge implements TailwindMergeContract
      */
     public function merge(...$args): string
     {
-        $input = collect($args)->flatten()->join(' ');
+        $input = Collection::make($args)->flatten()->join(' ');
 
         $conflictingClassGroups = [];
 

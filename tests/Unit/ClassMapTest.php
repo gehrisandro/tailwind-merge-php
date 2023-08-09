@@ -1,15 +1,16 @@
 <?php
 
 use TailwindMerge\Support\ClassMap;
+use TailwindMerge\Support\Collection;
 use TailwindMerge\Support\Config;
 use TailwindMerge\ValueObjects\ClassPartObject;
 
 test('class map has correct class groups at first part', function () {
     $classMap = ClassMap::create(Config::getDefaultConfig());
 
-    $classGroupsByFirstPart = collect($classMap->nextPart)
+    $classGroupsByFirstPart = Collection::make($classMap->nextPart)
         ->mapWithKeys(function ($value, $key) {
-            return [$key => collect(getClassGroupsInClassPart($value))->sort()->values()];
+            return [$key => Collection::make(getClassGroupsInClassPart($value))->sort()->values()];
         })->toArray();
 
     expect($classMap->classGroupId)->toBeNull();

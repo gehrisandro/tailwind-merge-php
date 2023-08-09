@@ -2,7 +2,7 @@
 
 namespace TailwindMerge\Validators;
 
-use Illuminate\Support\Collection;
+use TailwindMerge\Support\Collection;
 use TailwindMerge\Support\Str;
 
 /**
@@ -32,6 +32,6 @@ class LengthValidator implements \TailwindMerge\Contracts\ValidatorContract
      */
     private static function stringLengths(): Collection
     {
-        return collect(['px', 'full', 'screen']);
+        return Collection::make(['px', 'full', 'screen']);
     }
 }

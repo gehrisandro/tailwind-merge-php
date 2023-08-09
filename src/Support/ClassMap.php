@@ -42,14 +42,15 @@ class ClassMap
             return $classGroupEntries;
         }
 
-        return collect($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
-            $prefixedClassGroup = collect($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
+        // @phpstan-ignore-next-line
+        return Collection::make($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
+            $prefixedClassGroup = Collection::make($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
                 if (is_string($classDefinition)) {
                     return $prefix.$classDefinition;
                 }
 
                 if (is_array($classDefinition)) {
-                    return collect($classDefinition)->mapWithKeys(fn (array $value, string $key): array => [$prefix.$key => $value])->all();
+                    return Collection::make($classDefinition)->mapWithKeys(fn (array $value, string $key): array => [$prefix.$key => $value])->all();
                 }
 
                 //                return $classDefinition;
