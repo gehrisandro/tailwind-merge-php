@@ -2074,7 +2074,7 @@ class Config
         ];
     }
 
-    private static function fromTheme(string $key): ThemeGetter
+    public static function fromTheme(string $key): ThemeGetter
     {
         return new ThemeGetter($key);
     }
