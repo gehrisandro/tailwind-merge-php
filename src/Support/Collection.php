@@ -184,4 +184,9 @@ class Collection
     {
         return new self(array_filter($this->items));
     }
+
+    public function dd(): void
+    {
+        dd($this->items);
+    }
 }
