@@ -41,3 +41,15 @@ it('handles complex arbitrary value conflicts correctly', function (string $inpu
     ['grid-rows-[1fr,auto] grid-rows-2', 'grid-rows-2'],
     ['grid-rows-[repeat(20,minmax(0,1fr))] grid-rows-3', 'grid-rows-3'],
 ]);
+
+it('handles ambiguous arbitrary values correctly', function (string $input, string $output) {
+    expect(TailwindMerge::instance()->merge($input))
+        ->toBe($output);
+})->with([
+    ['mt-2 mt-[calc(theme(fontSize.4xl)/1.125)]', 'mt-[calc(theme(fontSize.4xl)/1.125)]'],
+    ['p-2 p-[calc(theme(fontSize.4xl)/1.125)_10px]', 'p-[calc(theme(fontSize.4xl)/1.125)_10px]'],
+    ['mt-2 mt-[length:theme(someScale.someValue)]', 'mt-[length:theme(someScale.someValue)]'],
+    ['mt-2 mt-[theme(someScale.someValue)]', 'mt-[theme(someScale.someValue)]'],
+    ['text-2xl text-[length:theme(someScale.someValue)]', 'text-[length:theme(someScale.someValue)]'],
+    ['text-2xl text-[calc(theme(fontSize.4xl)/1.125)]', 'text-[calc(theme(fontSize.4xl)/1.125)]'],
+]);
