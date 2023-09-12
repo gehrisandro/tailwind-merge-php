@@ -2,6 +2,7 @@
 
 namespace TailwindMerge;
 
+use Psr\SimpleCache\CacheInterface;
 use TailwindMerge\Support\Config;
 
 final class Factory
@@ -10,6 +11,8 @@ final class Factory
      * @var array<string, mixed>
      */
     private array $additionalConfiguration = [];
+
+    private ?CacheInterface $cache = null;
 
     /**
      * Override the default configuration.
@@ -23,6 +26,13 @@ final class Factory
         return $this;
     }
 
+    public function withCache(CacheInterface $cache): self
+    {
+        $this->cache = $cache;
+
+        return $this;
+    }
+
     /**
      * Creates a new TailwindMerge instance.
      */
@@ -31,6 +41,6 @@ final class Factory
         Config::setAdditionalConfig($this->additionalConfiguration);
         $config = Config::getMergedConfig();
 
-        return new TailwindMerge($config);
+        return new TailwindMerge($config, $this->cache);
     }
 }

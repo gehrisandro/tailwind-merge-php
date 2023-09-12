@@ -26,6 +26,7 @@ If you find this package helpful, please consider sponsoring the maintainer:
 ## Table of Contents
 - [Get Started](#get-started)
 - [Usage](#usage)
+- [Cache](#cache)
 - [Configuration](#configuration)
   - [Custom Tailwind Config](#custom-tailwind-config)
 - [Contributing](#contributing)
@@ -111,6 +112,20 @@ $tw->merge(['h-10', 'h-20']); // h-20
 $tw->merge(['h-10', 'h-20'], 'h-30'); // h-30
 $tw->merge(['h-10', 'h-20'], 'h-30', ['h-40']); // h-40
 ```
+
+## Cache
+For a better performance, `TailwindMerge` can cache the results of the merge operation.
+To activate pass your cache instance to the `withCache` method.
+
+It accepts any [PSR-16](https://www.php-fig.org/psr/psr-16/) compatible cache implementation.
+
+```php
+TailwindMerge::factory()
+  ->withCache($cache)
+  ->make();
+```
+
+When you are making changes to the configuration make sure to clear the cache.
 
 ## Configuration
 
