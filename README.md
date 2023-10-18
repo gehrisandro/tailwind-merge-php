@@ -28,7 +28,6 @@ If you find this package helpful, please consider sponsoring the maintainer:
 - [Usage](#usage)
 - [Cache](#cache)
 - [Configuration](#configuration)
-  - [Custom Tailwind Config](#custom-tailwind-config)
 - [Contributing](#contributing)
 
 ## Get Started
@@ -129,11 +128,31 @@ When you are making changes to the configuration make sure to clear the cache.
 
 ## Configuration
 
-> **Note:** To do
+If you are using Tailwind CSS without any extra config, you can use TailwindMerge right away. And stop reading here.
 
-### Custom Tailwind Config
+If you're using a custom Tailwind config, you may need to configure TailwindMerge as well to merge classes properly.
 
-> **Note:** To do
+By default TailwindMerge is configured in a way that you can still use it if all the following apply to your Tailwind config:
+
+- Only using color names which don't clash with other Tailwind class names
+- Only deviating by number values from number-based Tailwind classes
+- Only using font-family classes which don't clash with default font-weight classes
+- Sticking to default Tailwind config for everything else
+
+If some of these points don't apply to you, you need to customize the configuration.
+
+This is an example to add a custom font size of "very-large":
+```php
+TailwindMerge::factory()->withConfiguration([
+        'classGroups' => [
+            'font-size' => [
+                ['text' => ['very-large']]
+            ],
+        ],
+    ])->make();
+```
+
+For a more detailed explanation of the configuration options, visit the [original package documentation](https://github.com/dcastil/tailwind-merge/blob/v1.14.0/docs/configuration.md).
 
 ## Contributing
 
