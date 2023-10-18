@@ -19,4 +19,5 @@ test('is integer', function ($input, $output) {
     ['1/2', false],
     ['1%', false],
     ['1px', false],
+    ['', false],
 ]);

@@ -9,4 +9,5 @@ test('is number', function ($input, $output) {
     ['1.5', true],
     ['one', false],
     ['1px', false],
+    ['', false],
 ]);
