@@ -93,7 +93,7 @@ class TailwindMerge implements TailwindMergeContract
             return $callback($input);
         }
 
-        $key = 'tailwind-merge-'.md5($input);
+        $key = hash('xxh3', 'tailwind-merge-'.$input);
 
         if ($this->cache->has($key)) {
             $cachedValue = $this->cache->get($key);
