@@ -7,6 +7,7 @@ test('is arbitrary size', function ($input, $output) {
 })->with([
     ['[size:2px]', true],
     ['[size:bla]', true],
+    ['[length:200px_100px]', true],
 
     ['[2px]', false],
     ['[bla]', false],

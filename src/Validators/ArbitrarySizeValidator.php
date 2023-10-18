@@ -13,6 +13,6 @@ class ArbitrarySizeValidator implements \TailwindMerge\Contracts\ValidatorContra
 
     public static function validate(string $value): bool
     {
-        return self::getIsArbitraryValue($value, 'size', fn (): bool => false);
+        return self::getIsArbitraryValue($value, ['length', 'size', 'percentage'], fn (): bool => false);
     }
 }
