@@ -3,12 +3,12 @@
 namespace TailwindMerge\Support;
 
 use TailwindMerge\Validators\AnyValueValidator;
+use TailwindMerge\Validators\ArbitraryImageValidator;
 use TailwindMerge\Validators\ArbitraryLengthValidator;
 use TailwindMerge\Validators\ArbitraryNumberValidator;
 use TailwindMerge\Validators\ArbitraryPositionValidator;
 use TailwindMerge\Validators\ArbitraryShadowValidator;
 use TailwindMerge\Validators\ArbitrarySizeValidator;
-use TailwindMerge\Validators\ArbitraryUrlValidator;
 use TailwindMerge\Validators\ArbitraryValueValidator;
 use TailwindMerge\Validators\IntegerValidator;
 use TailwindMerge\Validators\LengthValidator;
@@ -1043,7 +1043,7 @@ class Config
                         'bg' => [
                             'none',
                             ['gradient-to' => ['t', 'tr', 'r', 'br', 'b', 'bl', 'l', 'tl']],
-                            ArbitraryUrlValidator::validate(...),
+                            ArbitraryImageValidator::validate(...),
                         ],
                     ],
                 ],

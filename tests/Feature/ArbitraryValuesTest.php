@@ -53,5 +53,5 @@ it('handles ambiguous arbitrary values correctly', function (string $input, stri
     ['text-2xl text-[length:theme(someScale.someValue)]', 'text-[length:theme(someScale.someValue)]'],
     ['text-2xl text-[calc(theme(fontSize.4xl)/1.125)]', 'text-[calc(theme(fontSize.4xl)/1.125)]'],
     ['bg-cover bg-[percentage:30%] bg-[length:200px_100px]', 'bg-[length:200px_100px]'],
-    //    ['bg-none bg-[url(.)] bg-[image:.] bg-[url:.] bg-[linear-gradient(.)] bg-gradient-to-r', 'bg-gradient-to-r'],
+    ['bg-none bg-[url(.)] bg-[image:.] bg-[url:.] bg-[linear-gradient(.)] bg-gradient-to-r', 'bg-gradient-to-r'],
 ]);
