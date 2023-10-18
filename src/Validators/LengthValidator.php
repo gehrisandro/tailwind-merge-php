@@ -20,11 +20,8 @@ class LengthValidator implements \TailwindMerge\Contracts\ValidatorContract
         if (self::stringLengths()->contains($value)) {
             return true;
         }
-        if (Str::hasMatch(self::FRACTION_REGEX, $value)) {
-            return true;
-        }
 
-        return ArbitraryLengthValidator::validate($value);
+        return Str::hasMatch(self::FRACTION_REGEX, $value);
     }
 
     /**

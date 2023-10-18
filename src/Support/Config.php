@@ -116,13 +116,13 @@ class Config
             'prefix' => null,
             'theme' => [
                 'colors' => [AnyValueValidator::validate(...)],
-                'spacing' => [LengthValidator::validate(...)],
+                'spacing' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)],
                 'blur' => ['none', '', TshirtSizeValidator::validate(...), ArbitraryValueValidator::validate(...)],
                 'brightness' => self::getNumber(),
                 'borderColor' => [$colors],
                 'borderRadius' => ['none', '', 'full', TshirtSizeValidator::validate(...), ArbitraryValueValidator::validate(...)],
                 'borderSpacing' => self::getSpacingWithArbitrary($spacing),
-                'borderWidth' => self::getLengthWithEmpty(),
+                'borderWidth' => self::getLengthWithEmptyAndArbitrary(),
                 'contrast' => self::getNumber(),
                 'grayscale' => self::getZeroAndEmpty(),
                 'hueRotate' => self::getNumberAndArbitrary(),
@@ -356,7 +356,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/z-index
                  */
-                'z' => [['z' => ['auto', IntegerValidator::validate(...)]]],
+                'z' => [['z' => ['auto', IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
                 // Flexbox and Grid
                 /**
                  * Flex Basis
@@ -399,7 +399,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/order
                  */
-                'order' => [['order' => ['first', 'last', 'none', IntegerValidator::validate(...)]]],
+                'order' => [['order' => ['first', 'last', 'none', IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Grid Template Columns
                  *
@@ -411,7 +411,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/grid-column
                  */
-                'col-start-end' => [['col' => ['auto', ['span' => ['full', IntegerValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
+                'col-start-end' => [['col' => ['auto', ['span' => ['full', IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Grid Column Start
                  *
@@ -435,7 +435,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/grid-row
                  */
-                'row-start-end' => [['row' => ['auto', ['span' => [IntegerValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
+                'row-start-end' => [['row' => ['auto', ['span' => [IntegerValidator::validate(...), ArbitraryValueValidator::validate(...)]], ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Grid Row Start
                  *
@@ -716,7 +716,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/min-height
                  */
-                'min-h' => [['min-h' => ['min', 'max', 'fit', ArbitraryValueValidator::validate(...), LengthValidator::validate(...)]]],
+                'min-h' => [['min-h' => ['min', 'max', 'fit', LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Max-Height
                  *
@@ -842,8 +842,8 @@ class Config
                         'normal',
                         'relaxed',
                         'loose',
-                        ArbitraryValueValidator::validate(...),
                         LengthValidator::validate(...),
+                        ArbitraryValueValidator::validate(...),
                     ]],
                 ],
                 /**
@@ -912,13 +912,13 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/text-decoration-thickness
                  */
-                'text-decoration-thickness' => [['decoration' => ['auto', 'from-font', LengthValidator::validate(...)]]],
+                'text-decoration-thickness' => [['decoration' => ['auto', 'from-font', LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
                 /**
                  * Text Underline Offset
                  *
                  * @see https://tailwindcss.com/docs/text-underline-offset
                  */
-                'underline-offset' => [['underline-offset' => ['auto', ArbitraryValueValidator::validate(...), LengthValidator::validate(...)]]],
+                'underline-offset' => [['underline-offset' => ['auto', LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Text Decoration Color
                  *
@@ -1341,13 +1341,13 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/outline-offset
                  */
-                'outline-offset' => [['outline-offset' => [ArbitraryValueValidator::validate(...), LengthValidator::validate(...)]]],
+                'outline-offset' => [['outline-offset' => [LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
                 /**
                  * Outline Width
                  *
                  * @see https://tailwindcss.com/docs/outline-width
                  */
-                'outline-w' => [['outline' => [LengthValidator::validate(...)]]],
+                'outline-w' => [['outline' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
                 /**
                  * Outline Color
                  *
@@ -1359,7 +1359,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/ring-width
                  */
-                'ring-w' => [['ring' => self::getLengthWithEmpty()]],
+                'ring-w' => [['ring' => self::getLengthWithEmptyAndArbitrary()]],
                 /**
                  * Ring Width Inset
                  *
@@ -1383,7 +1383,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/ring-offset-width
                  */
-                'ring-offset-w' => [['ring-offset' => [LengthValidator::validate(...)]]],
+                'ring-offset-w' => [['ring-offset' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...)]]],
                 /**
                  * Ring Offset Color
                  *
@@ -1960,7 +1960,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/stroke-width
                  */
-                'stroke-w' => [['stroke' => [LengthValidator::validate(...), ArbitraryNumberValidator::validate(...)]]],
+                'stroke-w' => [['stroke' => [LengthValidator::validate(...), ArbitraryLengthValidator::validate(...), ArbitraryNumberValidator::validate(...)]]],
                 /**
                  * Stroke
                  *
@@ -2093,7 +2093,7 @@ class Config
     /**
      * @return array<int, string|callable>
      */
-    private static function getLengthWithEmpty(): array
+    private static function getLengthWithEmptyAndArbitrary(): array
     {
         return [
             '',
