@@ -19,8 +19,6 @@ Supports Tailwind v3.0 up to v3.3.
 If you find this package helpful, please consider sponsoring the maintainer:
 - Sandro Gehri: **[github.com/sponsors/gehrisandro](https://github.com/sponsors/gehrisandro)**
 
-> **Attention:** This package is still in early development.
-
 > If you are using **Laravel**, you can use the [TailwindMerge for Laravel](https://github.com/gehrisandro/tailwind-merge-laravel)
 
 ## Table of Contents
