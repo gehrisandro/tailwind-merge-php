@@ -27,3 +27,15 @@ it('ring and shadow classes do not create conflict', function (string $input, st
     ['shadow ring', 'shadow ring'],
     ['shadow-md ring-2', 'shadow-md ring-2'],
 ]);
+
+it('touch classes do create conflicts correctly', function (string $input, string $output) {
+    expect(TailwindMerge::instance()->merge($input))
+        ->toBe($output);
+})->with([
+    ['touch-pan-x touch-pan-right', 'touch-pan-right'],
+    ['touch-none touch-pan-x', 'touch-pan-x'],
+    ['touch-pan-x touch-none', 'touch-none'],
+    ['touch-pan-x touch-pan-y touch-pinch-zoom', 'touch-pan-x touch-pan-y touch-pinch-zoom'],
+    ['touch-manipulation touch-pan-x touch-pan-y touch-pinch-zoom', 'touch-pan-x touch-pan-y touch-pinch-zoom'],
+    ['touch-pan-x touch-pan-y touch-pinch-zoom touch-auto', 'touch-auto'],
+]);

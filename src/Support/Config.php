@@ -1928,12 +1928,36 @@ class Config
                         'touch' => [
                             'auto',
                             'none',
-                            'pinch-zoom',
                             'manipulation',
-                            ['pan' => ['x', 'left', 'right', 'y', 'up', 'down']],
                         ],
                     ],
                 ],
+                /**
+                 * Touch Action X
+                 *
+                 * @see https://tailwindcss.com/docs/touch-action
+                 */
+                'touch-x' => [
+                    [
+                        'touch-pan' => ['x', 'left', 'right'],
+                    ],
+                ],
+                /**
+                 * Touch Action Y
+                 *
+                 * @see https://tailwindcss.com/docs/touch-action
+                 */
+                'touch-y' => [
+                    [
+                        'touch-pan' => ['y', 'up', 'down'],
+                    ],
+                ],
+                /**
+                 * Touch Action Pinch Zoom
+                 *
+                 * @see https://tailwindcss.com/docs/touch-action
+                 */
+                'touch-pz' => ['touch-pinch-zoom'],
                 /**
                  * User Select
                  *
@@ -2067,6 +2091,10 @@ class Config
                 ],
                 'scroll-px' => ['scroll-pr', 'scroll-pl'],
                 'scroll-py' => ['scroll-pt', 'scroll-pb'],
+                'touch' => ['touch-x', 'touch-y', 'touch-pz'],
+                'touch-x' => ['touch'],
+                'touch-y' => ['touch'],
+                'touch-pz' => ['touch'],
             ],
             'conflictingClassGroupModifiers' => [
                 'font-size' => ['leading'],
