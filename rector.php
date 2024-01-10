@@ -11,10 +11,6 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/src',
     ]);
 
-    $rectorConfig->skip([
-        __DIR__.'/src/Support/Config.php' => \Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector::class,
-    ]);
-
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_81,
         SetList::CODE_QUALITY,

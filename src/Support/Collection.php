@@ -132,7 +132,7 @@ class Collection
      * @param  (callable(TValue, TKey): bool)|null  $callback
      * @return ?TValue
      */
-    public function first(callable $callback = null): mixed
+    public function first(?callable $callback = null): mixed
     {
         return Arr::first($this->items, $callback); // @phpstan-ignore-line
     }

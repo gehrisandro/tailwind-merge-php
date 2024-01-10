@@ -12,7 +12,7 @@ class ArbitraryImageValidator implements \TailwindMerge\Contracts\ValidatorContr
 {
     use ValidatesArbitraryValue;
 
-    final const IMAGE_REGEX = '/^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/';
+    final public const IMAGE_REGEX = '/^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/';
 
     public static function validate(string $value): bool
     {

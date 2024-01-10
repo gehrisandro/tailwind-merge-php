@@ -12,7 +12,7 @@ class ArbitraryShadowValidator implements \TailwindMerge\Contracts\ValidatorCont
 {
     use ValidatesArbitraryValue;
 
-    final const SHADOW_REGEX = '/^-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/';
+    final public const SHADOW_REGEX = '/^-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/';
 
     public static function validate(string $value): bool
     {

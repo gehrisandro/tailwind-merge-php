@@ -41,7 +41,7 @@ class Str
         return $result === false ? $subject : $result;
     }
 
-    public static function substr(string $string, int $start, int $length = null, string $encoding = 'UTF-8'): string
+    public static function substr(string $string, int $start, ?int $length = null, string $encoding = 'UTF-8'): string
     {
         return mb_substr($string, $start, $length, $encoding);
     }

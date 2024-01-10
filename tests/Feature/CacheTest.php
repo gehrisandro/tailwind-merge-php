@@ -58,7 +58,7 @@ class FakeCache implements CacheInterface
         return $default;
     }
 
-    public function set(string $key, mixed $value, DateInterval|int $ttl = null): bool
+    public function set(string $key, mixed $value, DateInterval|int|null $ttl = null): bool
     {
         $this->cache[$key] = $value;
 
@@ -84,7 +84,7 @@ class FakeCache implements CacheInterface
         throw new Exception('Not implemented');
     }
 
-    public function setMultiple(iterable $values, DateInterval|int $ttl = null): bool
+    public function setMultiple(iterable $values, DateInterval|int|null $ttl = null): bool
     {
         throw new Exception('Not implemented');
     }

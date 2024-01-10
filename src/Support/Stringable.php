@@ -20,10 +20,10 @@ class Stringable
     {
         $segments = preg_split($pattern, $this->value, $limit, $flags);
 
-        return empty($segments) ? Collection::make() : Collection::make($segments);
+        return $segments === [] || $segments === false ? Collection::make() : Collection::make($segments);
     }
 
-    public function substr(int $start, int $length = null, string $encoding = 'UTF-8'): self
+    public function substr(int $start, ?int $length = null, string $encoding = 'UTF-8'): self
     {
         return new self(Str::substr($this->value, $start, $length, $encoding));
     }
