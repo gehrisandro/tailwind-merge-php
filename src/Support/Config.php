@@ -224,13 +224,13 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/float
                  */
-                'float' => [['float' => ['right', 'left', 'none']]],
+                'float' => [['float' => ['right', 'left', 'none', 'start', 'end']]],
                 /**
                  * Clear
                  *
                  * @see https://tailwindcss.com/docs/clear
                  */
-                'clear' => [['clear' => ['left', 'right', 'both', 'none']]],
+                'clear' => [['clear' => ['left', 'right', 'both', 'none', 'start', 'end']]],
                 /**
                  * Isolation
                  *
@@ -677,7 +677,21 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/width
                  */
-                'w' => [['w' => ['auto', 'min', 'max', 'fit', ArbitraryValueValidator::validate(...), $spacing]]],
+                'w' => [
+                    [
+                        'w' => [
+                            'auto',
+                            'min',
+                            'max',
+                            'fit',
+                            'svw',
+                            'lvw',
+                            'dvw',
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
+                        ],
+                    ],
+                ],
                 /**
                  * Min-Width
                  *
@@ -692,7 +706,8 @@ class Config
                 'max-w' => [
                     [
                         'max-w' => [
-                            '0',
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
                             'none',
                             'full',
                             'min',
@@ -701,7 +716,6 @@ class Config
                             'prose',
                             ['screen' => [TshirtSizeValidator::validate(...)]],
                             TshirtSizeValidator::validate(...),
-                            ArbitraryValueValidator::validate(...),
                         ],
                     ],
                 ],
@@ -710,19 +724,43 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/height
                  */
-                'h' => [['h' => [ArbitraryValueValidator::validate(...), $spacing, 'auto', 'min', 'max', 'fit']]],
+                'h' => [
+                    [
+                        'h' => [
+                            ArbitraryValueValidator::validate(...),
+                            $spacing,
+                            'auto',
+                            'min',
+                            'max',
+                            'fit',
+                            'svh',
+                            'lvh',
+                            'dvh',
+                        ],
+                    ],
+                ],
                 /**
                  * Min-Height
                  *
                  * @see https://tailwindcss.com/docs/min-height
                  */
-                'min-h' => [['min-h' => ['min', 'max', 'fit', LengthValidator::validate(...), ArbitraryValueValidator::validate(...)]]],
+                'min-h' => [
+                    ['min-h' => [ArbitraryValueValidator::validate(...), $spacing, 'min', 'max', 'fit', 'svh', 'lvh', 'dvh']],
+                ],
                 /**
                  * Max-Height
                  *
                  * @see https://tailwindcss.com/docs/max-height
                  */
-                'max-h' => [['max-h' => [ArbitraryValueValidator::validate(...), $spacing, 'min', 'max', 'fit']]],
+                'max-h' => [
+                    ['max-h' => [ArbitraryValueValidator::validate(...), $spacing, 'min', 'max', 'fit', 'svh', 'lvh', 'dvh']],
+                ],
+                /**
+                 * Size
+                 *
+                 * @see https://tailwindcss.com/docs/size
+                 */
+                'size' => [['size' => [ArbitraryValueValidator::validate(...), $spacing, 'auto', 'min', 'max', 'fit']]],
                 // Typography
                 /**
                  * Font Size
@@ -937,6 +975,12 @@ class Config
                  * @see https://tailwindcss.com/docs/text-overflow
                  */
                 'text-overflow' => ['truncate', 'text-ellipsis', 'text-clip'],
+                /**
+                 * Text Wrap
+                 *
+                 * @see https://tailwindcss.com/docs/text-wrap
+                 */
+                'text-wrap' => [['text' => ['wrap', 'nowrap', 'balance', 'pretty']]],
                 /**
                  * Text Indent
                  *
@@ -1713,7 +1757,7 @@ class Config
                  *
                  * @see https://tailwindcss.com/docs/appearance
                  */
-                'appearance' => ['appearance-none'],
+                'appearance' => [['appearance' => ['none', 'auto']]],
                 /**
                  * Cursor
                  *
@@ -1998,6 +2042,12 @@ class Config
                  * @see https://tailwindcss.com/docs/screen-readers
                  */
                 'sr' => ['sr-only', 'not-sr-only'],
+                /**
+                 * Forced Color Adjust
+                 *
+                 * @see https://tailwindcss.com/docs/forced-color-adjust
+                 */
+                'forced-color-adjust' => [['forced-color-adjust' => ['auto', 'none']]],
             ],
             'conflictingClassGroups' => [
                 'overflow' => ['overflow-x', 'overflow-y'],
@@ -2013,6 +2063,7 @@ class Config
                 'm' => ['mx', 'my', 'ms', 'me', 'mt', 'mr', 'mb', 'ml'],
                 'mx' => ['mr', 'ml'],
                 'my' => ['mt', 'mb'],
+                'size' => ['w', 'h'],
                 'font-size' => ['leading'],
                 'fvn-normal' => [
                     'fvn-ordinal',
@@ -2026,6 +2077,7 @@ class Config
                 'fvn-figure' => ['fvn-normal'],
                 'fvn-spacing' => ['fvn-normal'],
                 'fvn-fraction' => ['fvn-normal'],
+                'line-clamp' => ['display', 'overflow'],
                 'rounded' => [
                     'rounded-s',
                     'rounded-e',

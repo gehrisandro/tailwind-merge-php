@@ -39,3 +39,11 @@ it('touch classes do create conflicts correctly', function (string $input, strin
     ['touch-manipulation touch-pan-x touch-pan-y touch-pinch-zoom', 'touch-pan-x touch-pan-y touch-pinch-zoom'],
     ['touch-pan-x touch-pan-y touch-pinch-zoom touch-auto', 'touch-auto'],
 ]);
+
+it('line-clamp classes do create conflicts correctly', function (string $input, string $output) {
+    expect(TailwindMerge::instance()->merge($input))
+        ->toBe($output);
+})->with([
+    ['overflow-auto inline line-clamp-1', 'line-clamp-1'],
+    ['line-clamp-1 overflow-auto inline', 'line-clamp-1 overflow-auto inline'],
+]);

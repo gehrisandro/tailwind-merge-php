@@ -27,3 +27,19 @@ it('supports Tailwind CSS v3.3 features', function (string|array $input, string 
     ['content-normal content-center content-stretch', 'content-stretch'],
     ['whitespace-nowrap whitespace-break-spaces', 'whitespace-break-spaces'],
 ]);
+
+it('supports Tailwind CSS v3.4 features', function (string|array $input, string $output) {
+    expect(TailwindMerge::instance()->merge($input))
+        ->toBe($output);
+})->with([
+    ['h-svh h-dvh w-svw w-dvw', 'h-dvh w-dvw'],
+    ['has-[[data-potato]]:p-1 has-[[data-potato]]:p-2 group-has-[:checked]:grid group-has-[:checked]:flex', 'has-[[data-potato]]:p-2 group-has-[:checked]:flex'],
+    ['text-wrap text-pretty', 'text-pretty'],
+    ['w-5 h-3 size-10 w-12', 'size-10 w-12'],
+    ['grid-cols-2 grid-cols-subgrid grid-rows-5 grid-rows-subgrid', 'grid-cols-subgrid grid-rows-subgrid'],
+    ['min-w-0 min-w-50 min-w-px max-w-0 max-w-50 max-w-px', 'min-w-px max-w-px'],
+    ['forced-color-adjust-none forced-color-adjust-auto', 'forced-color-adjust-auto'],
+    ['appearance-none appearance-auto', 'appearance-auto'],
+    ['float-start float-end clear-start clear-end', 'float-end clear-end'],
+    ['*:p-10 *:p-20 hover:*:p-10 hover:*:p-20', '*:p-20 hover:*:p-20'],
+]);
