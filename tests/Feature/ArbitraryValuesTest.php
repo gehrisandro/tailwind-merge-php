@@ -55,3 +55,10 @@ it('handles ambiguous arbitrary values correctly', function (string $input, stri
     ['bg-cover bg-[percentage:30%] bg-[length:200px_100px]', 'bg-[length:200px_100px]'],
     ['bg-none bg-[url(.)] bg-[image:.] bg-[url:.] bg-[linear-gradient(.)] bg-gradient-to-r', 'bg-gradient-to-r'],
 ]);
+
+it('handles ambiguous non conflicting arbitrary values correctly', function (string $input, string $output) {
+    expect(TailwindMerge::instance()->merge($input))
+        ->toBe($output);
+})->with([
+    ['border-[2px] border-[0.85px] border-[#ff0000] border-[#0000ff]', 'border-[0.85px] border-[#0000ff]'],
+]);

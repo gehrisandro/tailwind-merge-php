@@ -2178,6 +2178,7 @@ class Config
         return [
             '',
             LengthValidator::validate(...),
+            ArbitraryLengthValidator::validate(...),
         ];
     }
 
