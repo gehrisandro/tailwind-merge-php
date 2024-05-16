@@ -21,7 +21,7 @@
         "pestphp/pest-plugin-mock": "^2.0.0",
         "pestphp/pest-plugin-type-coverage": "^2.8",
         "phpstan/phpstan": "^1.10.55",
-        "rector/rector": "^0.19",
+        "rector/rector": "^1.0.5",
         "symfony/var-dumper": "^6.4.2"
     },
     "autoload": {
