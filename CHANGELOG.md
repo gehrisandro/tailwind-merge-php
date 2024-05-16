@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.1.1 (2024-05-16)
+### Fixed
+-   Fix arbitrary shadow with inset not recognized
+-   Fix non-conflicting arbitrary border color and width
+
 ## v1.1.0 (2024-01-10)
 ### Added
 -   Add support for Tailwind CSS v3.4
