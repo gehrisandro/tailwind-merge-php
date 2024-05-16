@@ -6,6 +6,7 @@ test('is arbitrary shadow', function ($input, $output) {
     expect(ArbitraryShadowValidator::validate($input))->toBe($output);
 })->with([
     ['[0_35px_60px_-15px_rgba(0,0,0,0.3)]', true],
+    ['[inset_0_1px_0,inset_0_-1px_0]', true],
     ['[0_0_#00f]', true],
     ['[.5rem_0_rgba(5,5,5,5)]', true],
     ['[-.5rem_0_#123456]', true],
