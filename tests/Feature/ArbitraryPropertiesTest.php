@@ -8,6 +8,7 @@ it('handles arbitrary property conflicts correctly', function (string $input, st
 })->with([
     ['[paint-order:markers] [paint-order:normal]', '[paint-order:normal]'],
     ['[paint-order:markers] [--my-var:2rem] [paint-order:normal] [--my-var:4px]', '[paint-order:normal] [--my-var:4px]'],
+    ['[--first-var:1rem] [--second-var:2rem]', '[--first-var:1rem] [--second-var:2rem]'],
 ]);
 
 it('handles arbitrary property conflicts with modifiers correctly', function (string $input, string $output) {

@@ -116,7 +116,7 @@ class TailwindClassParser
     private function getGroupIdForArbitraryProperty(string $className): string
     {
         if (Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '' && Str::match(self::ARBITRARY_PROPERTY_REGEX, $className) !== '0') {
-            $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className)[1] ?? '';
+            $arbitraryPropertyClassName = Str::match(self::ARBITRARY_PROPERTY_REGEX, $className);
             $property = Str::before($arbitraryPropertyClassName, ':');
 
             if ($property !== '' && $property !== '0') {
