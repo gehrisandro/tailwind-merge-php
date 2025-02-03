@@ -2,6 +2,8 @@
 
 namespace TailwindMerge\Validators\Concerns;
 
+use Closure;
+
 /**
  * @internal
  */
@@ -9,6 +11,7 @@ trait ValidatesArbitraryValue
 {
     /**
      * @param  string|array<array-key, string>  $labels
+     * @param  Closure(string): bool  $isLengthOnly
      */
     protected static function getIsArbitraryValue(string $value, string|array $labels, callable $isLengthOnly): bool
     {
@@ -21,7 +24,7 @@ trait ValidatesArbitraryValue
                 return in_array($result[1], $labels);
             }
 
-            return $isLengthOnly($result[2] ?? null);
+            return $isLengthOnly($result[2] ?? '');
         }
 
         return false;

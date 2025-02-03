@@ -2,6 +2,7 @@
 
 namespace TailwindMerge;
 
+use Closure;
 use Psr\SimpleCache\CacheInterface;
 use TailwindMerge\Contracts\TailwindMergeContract;
 use TailwindMerge\Support\Collection;
@@ -23,7 +24,7 @@ class TailwindMerge implements TailwindMergeContract
      */
     public static function factory(): Factory
     {
-        return new Factory();
+        return new Factory;
     }
 
     /**
@@ -32,8 +33,7 @@ class TailwindMerge implements TailwindMergeContract
     public function __construct(
         private readonly array $configuration,
         private readonly ?CacheInterface $cache = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  string|array<array-key, string|array<array-key, string>>  ...$args
@@ -81,13 +81,16 @@ class TailwindMerge implements TailwindMergeContract
         $conflicts = Config::getMergedConfig()['conflictingClassGroups'][$classGroupId] ?? [];
 
         if ($hasPostfixModifier && isset(Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId])) {
-            return [...$conflicts, ...Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId]];
+            return [...$conflicts, ...Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId]]; // @phpstan-ignore-line
         }
 
         return $conflicts;
     }
 
-    private function withCache(string $input, \Closure $callback): string
+    /**
+     * @param  Closure(string): string  $callback
+     */
+    private function withCache(string $input, Closure $callback): string
     {
         if (! $this->cache instanceof CacheInterface) {
             return $callback($input);

@@ -55,11 +55,11 @@ class Config
         if ($mergeValue === null) {
             return $mergeValue;
         }
-        if (is_array($mergeValue) && array_is_list($mergeValue) && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey])) {
+        if (array_is_list($mergeValue) && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey])) {
             return [...$baseConfig[$mergeKey], ...$mergeValue];
         }
 
-        if (is_array($mergeValue) && ! array_is_list($mergeValue) /* && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey]) */) {
+        if (! array_is_list($mergeValue) /* && is_array($baseConfig[$mergeKey]) && array_is_list($baseConfig[$mergeKey]) */) {
             if ($baseConfig[$mergeKey] === null) {
                 return $mergeValue;
             }

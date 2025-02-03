@@ -8,7 +8,7 @@ use TailwindMerge\ValueObjects\ThemeGetter;
 
 class ClassMap
 {
-    final public const CLASS_PART_SEPARATOR = '-';
+    final public const string CLASS_PART_SEPARATOR = '-';
 
     /**
      * @param  array{cacheSize: int, prefix: ?string, theme: array<string, mixed>, classGroups: array<string, mixed>,conflictingClassGroups: array<string, array<int, string>>, conflictingClassGroupModifiers: array<string, array<int, string>>}  $config
@@ -18,7 +18,7 @@ class ClassMap
         $theme = $config['theme'];
         $prefix = $config['prefix'];
 
-        $classMap = new ClassPartObject();
+        $classMap = new ClassPartObject;
 
         $prefixedClassGroupEntries = self::getPrefixedClassGroupEntries(
             $config['classGroups'],
@@ -112,7 +112,7 @@ class ClassMap
 
         foreach (explode(self::CLASS_PART_SEPARATOR, $path) as $pathPart) {
             if (! isset($currentClassPartObject->nextPart[$pathPart])) {
-                $currentClassPartObject->nextPart[$pathPart] = new ClassPartObject();
+                $currentClassPartObject->nextPart[$pathPart] = new ClassPartObject;
             }
 
             $currentClassPartObject = $currentClassPartObject->nextPart[$pathPart];

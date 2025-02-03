@@ -10,7 +10,7 @@ use TailwindMerge\Support\Str;
  */
 class LengthValidator implements \TailwindMerge\Contracts\ValidatorContract
 {
-    final public const FRACTION_REGEX = '/^\d+\/\d+$/';
+    final public const string FRACTION_REGEX = '/^\d+\/\d+$/';
 
     public static function validate(string $value): bool
     {

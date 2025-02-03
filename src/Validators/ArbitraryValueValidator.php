@@ -9,7 +9,7 @@ use TailwindMerge\Support\Str;
  */
 class ArbitraryValueValidator implements \TailwindMerge\Contracts\ValidatorContract
 {
-    final public const ARBITRARY_VALUE_REGEX = '/^\[(?:([a-z-]+):)?(.+)\]$/i';
+    final public const string ARBITRARY_VALUE_REGEX = '/^\[(?:([a-z-]+):)?(.+)\]$/i';
 
     public static function validate(string $value): bool
     {

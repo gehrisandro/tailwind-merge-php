@@ -8,11 +8,11 @@ use TailwindMerge\ValueObjects\ParsedClass;
 
 class TailwindClassParser
 {
-    final public const CLASS_PART_SEPARATOR = '-';
+    final public const string CLASS_PART_SEPARATOR = '-';
 
-    final public const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
+    final public const string ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
 
-    final public const IMPORTANT_MODIFIER = '!';
+    final public const string IMPORTANT_MODIFIER = '!';
 
     private readonly ClassPartObject $classMap;
 
@@ -49,7 +49,7 @@ class TailwindClassParser
 
         $classRest = implode(self::CLASS_PART_SEPARATOR, $classParts);
 
-        return Collection::make($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
+        return Collection::make($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId; // @phpstan-ignore-line
     }
 
     public function parse(string $class): ParsedClass
