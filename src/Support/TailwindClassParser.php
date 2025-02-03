@@ -8,11 +8,11 @@ use TailwindMerge\ValueObjects\ParsedClass;
 
 class TailwindClassParser
 {
-    final public const CLASS_PART_SEPARATOR = '-';
+    final public const string CLASS_PART_SEPARATOR = '-';
 
-    final public const ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
+    final public const string ARBITRARY_PROPERTY_REGEX = '/^\[(.+)\]$/';
 
-    final public const IMPORTANT_MODIFIER = '!';
+    final public const string IMPORTANT_MODIFIER = '!';
 
     private readonly ClassPartObject $classMap;
 
