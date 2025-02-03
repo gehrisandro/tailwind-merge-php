@@ -49,7 +49,7 @@ class TailwindClassParser
 
         $classRest = implode(self::CLASS_PART_SEPARATOR, $classParts);
 
-        return Collection::make($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId;
+        return Collection::make($classPartObject->validators)->first(fn (ClassValidatorObject $validator) => ($validator->validator)($classRest))?->classGroupId; // @phpstan-ignore-line
     }
 
     public function parse(string $class): ParsedClass

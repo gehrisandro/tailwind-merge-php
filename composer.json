@@ -15,14 +15,13 @@
     },
     "require-dev": {
         "laravel/pint": "^1.13.8",
-        "nunomaduro/collision": "^7.10",
-        "pestphp/pest": "^v2.24.0",
-        "pestphp/pest-plugin-arch": "^2.6",
-        "pestphp/pest-plugin-mock": "^2.0.0",
-        "pestphp/pest-plugin-type-coverage": "^2.8",
-        "phpstan/phpstan": "^1.10.55",
-        "rector/rector": "^1.0.5",
-        "symfony/var-dumper": "^6.4.2"
+        "nunomaduro/collision": "^v8.6.1",
+        "pestphp/pest": "^v3.7.4",
+        "pestphp/pest-plugin-arch": "^v3.0.0",
+        "pestphp/pest-plugin-type-coverage": "^v3.2.3",
+        "phpstan/phpstan": "^2.1.2",
+        "rector/rector": "^2.0.7",
+        "symfony/var-dumper": "^v7.2.3"
     },
     "autoload": {
         "psr-4": {

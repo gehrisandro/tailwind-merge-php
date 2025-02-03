@@ -2,6 +2,7 @@
 
 namespace TailwindMerge;
 
+use Closure;
 use Psr\SimpleCache\CacheInterface;
 use TailwindMerge\Contracts\TailwindMergeContract;
 use TailwindMerge\Support\Collection;
@@ -86,7 +87,10 @@ class TailwindMerge implements TailwindMergeContract
         return $conflicts;
     }
 
-    private function withCache(string $input, \Closure $callback): string
+    /**
+     * @param  Closure(string): string  $callback
+     */
+    private function withCache(string $input, Closure $callback): string
     {
         if (! $this->cache instanceof CacheInterface) {
             return $callback($input);
