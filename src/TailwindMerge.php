@@ -80,7 +80,7 @@ class TailwindMerge implements TailwindMergeContract
         $conflicts = Config::getMergedConfig()['conflictingClassGroups'][$classGroupId] ?? [];
 
         if ($hasPostfixModifier && isset(Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId])) {
-            return [...$conflicts, ...Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId]];
+            return [...$conflicts, ...Config::getMergedConfig()['conflictingClassGroupModifiers'][$classGroupId]]; // @phpstan-ignore-line
         }
 
         return $conflicts;
