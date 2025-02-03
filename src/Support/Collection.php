@@ -160,7 +160,7 @@ class Collection
      * @param  TValue  ...$values
      * @return $this
      */
-    public function push(...$values): self
+    public function push(mixed ...$values): self
     {
         foreach ($values as $value) {
             $this->items[] = $value;

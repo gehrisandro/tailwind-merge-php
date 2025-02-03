@@ -6,8 +6,7 @@ class ThemeGetter
 {
     public function __construct(
         public string $key
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string, array<string, mixed>>  $theme

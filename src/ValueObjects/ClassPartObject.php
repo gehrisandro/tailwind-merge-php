@@ -12,6 +12,5 @@ class ClassPartObject
         public array $nextPart = [],
         public array $validators = [],
         public ?string $classGroupId = null,
-    ) {
-    }
+    ) {}
 }
