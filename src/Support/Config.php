@@ -29,7 +29,16 @@ class Config
      */
     public static function getMergedConfig(): array
     {
-        $config = self::getDefaultConfig();
+        static $config = null;
+        static $lastAdditionalConfig = null;
+
+        // Reset default config if additional config has changed
+        if ($lastAdditionalConfig !== self::$additionalConfig) {
+            $config = null;
+            $lastAdditionalConfig = self::$additionalConfig;
+        }
+
+        $config ??= self::getDefaultConfig();
 
         foreach (self::$additionalConfig as $key => $additionalConfig) {
             $config[$key] = self::mergePropertyRecursively($config, $key, $additionalConfig);
