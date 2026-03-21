@@ -88,7 +88,7 @@ class TailwindClassParser
 
         $variantModifier = implode(':', $this->sortModifiers($modifiers));
 
-        $modifierId = $hasImportantModifier ? $variantModifier.self::IMPORTANT_MODIFIER : $variantModifier;
+        $modifierId = $hasImportantModifier ? $variantModifier . self::IMPORTANT_MODIFIER : $variantModifier;
 
         return new ParsedClass(
             modifiers: $modifiers,
@@ -121,7 +121,7 @@ class TailwindClassParser
 
             if ($property !== '' && $property !== '0') {
                 // I use two dots here because one dot is used as prefix for class groups in plugins
-                return 'arbitrary..'.$property;
+                return 'arbitrary..' . $property;
             }
         }
 

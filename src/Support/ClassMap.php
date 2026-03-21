@@ -18,7 +18,7 @@ class ClassMap
         $theme = $config['theme'];
         $prefix = $config['prefix'];
 
-        $classMap = new ClassPartObject;
+        $classMap = new ClassPartObject();
 
         $prefixedClassGroupEntries = self::getPrefixedClassGroupEntries(
             $config['classGroups'],
@@ -46,11 +46,11 @@ class ClassMap
         return Collection::make($classGroupEntries)->mapWithKeys(function (array $classGroup, string $classGroupId) use ($prefix): array {
             $prefixedClassGroup = Collection::make($classGroup)->map(function (string|array $classDefinition) use ($prefix): string|array {
                 if (is_string($classDefinition)) {
-                    return $prefix.$classDefinition;
+                    return $prefix . $classDefinition;
                 }
 
                 if (is_array($classDefinition)) {
-                    return Collection::make($classDefinition)->mapWithKeys(fn (array $value, string $key): array => [$prefix.$key => $value])->all();
+                    return Collection::make($classDefinition)->mapWithKeys(fn (array $value, string $key): array => [$prefix . $key => $value])->all();
                 }
 
                 //                return $classDefinition;
@@ -112,7 +112,7 @@ class ClassMap
 
         foreach (explode(self::CLASS_PART_SEPARATOR, $path) as $pathPart) {
             if (! isset($currentClassPartObject->nextPart[$pathPart])) {
-                $currentClassPartObject->nextPart[$pathPart] = new ClassPartObject;
+                $currentClassPartObject->nextPart[$pathPart] = new ClassPartObject();
             }
 
             $currentClassPartObject = $currentClassPartObject->nextPart[$pathPart];
