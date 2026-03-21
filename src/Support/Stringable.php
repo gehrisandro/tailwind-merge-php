@@ -4,9 +4,7 @@ namespace TailwindMerge\Support;
 
 class Stringable
 {
-    public function __construct(protected string $value)
-    {
-    }
+    public function __construct(protected string $value) {}
 
     public function trim(string $characters = ' '): self
     {
