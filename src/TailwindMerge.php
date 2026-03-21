@@ -23,7 +23,7 @@ class TailwindMerge implements TailwindMergeContract
      */
     public static function factory(): Factory
     {
-        return new Factory();
+        return new Factory;
     }
 
     /**
@@ -94,12 +94,9 @@ class TailwindMerge implements TailwindMergeContract
 
         $key = hash('xxh3', 'tailwind-merge-' . $input);
 
-        if ($this->cache->has($key)) {
-            $cachedValue = $this->cache->get($key);
-
-            if (is_string($cachedValue)) {
-                return $cachedValue;
-            }
+        $cachedValue = $this->cache->get($key);
+        if (is_string($cachedValue)) {
+            return $cachedValue;
         }
 
         $mergedClasses = $callback($input);
