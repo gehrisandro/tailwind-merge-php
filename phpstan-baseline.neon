@@ -1,86 +1,283 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method TailwindMerge\\\\Support\\\\ClassMap\\:\\:isThemeGetter\\(\\) has parameter \\$classDefinition with no value type specified in iterable type array\\.$#"
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
 			count: 1
 			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\Support\\\\ClassMap\\:\\:processClassesRecursively\\(\\) has parameter \\$classGroup with no value type specified in iterable type array\\.$#"
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\Support\\\\ClassMap\\:\\:processClassesRecursively\\(\\) has parameter \\$theme with no value type specified in iterable type array\\.$#"
+			message: '#^Cannot call method get\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<string,mixed\\>\\:\\:mapWithKeys\\(\\) expects callable\\(mixed, string\\)\\: array\\<string, array\\<array\\<string, array\\>\\|string\\>\\>, Closure\\(array, string\\)\\: non\\-empty\\-array\\<string, array\\<array\\<string, array\\>\\|string\\>\\> given\\.$#"
+			message: '#^Method TailwindMerge\\Support\\ClassMap\:\:isThemeGetter\(\) has parameter \$classDefinition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Parameter \\#1 \\$classGroup of static method TailwindMerge\\\\Support\\\\ClassMap\\:\\:processClassesRecursively\\(\\) expects array, mixed given\\.$#"
+			message: '#^Method TailwindMerge\\Support\\ClassMap\:\:processClassesRecursively\(\) has parameter \$classGroup with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Parameter \\$validator of class TailwindMerge\\\\ValueObjects\\\\ClassValidatorObject constructor expects Closure, callable\\(\\)\\: mixed given\\.$#"
+			message: '#^Method TailwindMerge\\Support\\ClassMap\:\:processClassesRecursively\(\) has parameter \$theme with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\Support\\\\Config\\:\\:mergePropertyRecursively\\(\\) has parameter \\$baseConfig with no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \$callback of method TailwindMerge\\Support\\Collection\<\(int\|string\),mixed\>\:\:map\(\) expects callable\(mixed, int\|string\)\: \(array\<string, array\>\|non\-falsy\-string\), Closure\(array\|string\)\: \(array\<string, array\>\|non\-falsy\-string\) given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Support/Config.php
+			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\Support\\\\Config\\:\\:mergePropertyRecursively\\(\\) has parameter \\$mergeValue with no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \$callback of method TailwindMerge\\Support\\Collection\<\(int\|string\),mixed\>\:\:mapWithKeys\(\) expects callable\(mixed, int\|string\)\: array\<non\-falsy\-string, array\>, Closure\(array, string\)\: non\-empty\-array\<non\-falsy\-string, array\> given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Support/Config.php
+			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\Support\\\\Config\\:\\:mergePropertyRecursively\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \$classDefinition of static method TailwindMerge\\Support\\ClassMap\:\:isThemeGetter\(\) expects array\|\(callable\(\)\: mixed\)\|TailwindMerge\\ValueObjects\\ThemeGetter, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Support/Config.php
+			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Parameter \\#3 \\$mergeValue of static method TailwindMerge\\\\Support\\\\Config\\:\\:mergePropertyRecursively\\(\\) expects array\\|bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
-			count: 1
-			path: src/Support/Config.php
-
-		-
-			message: "#^Method TailwindMerge\\\\Support\\\\TailwindClassParser\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Support/TailwindClassParser.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$config$#"
-			count: 1
-			path: src/Support/TailwindClassParser.php
-
-		-
-			message: "#^Parameter \\#1 \\$config of static method TailwindMerge\\\\Support\\\\ClassMap\\:\\:create\\(\\) expects array\\{cacheSize\\: int, prefix\\: string\\|null, theme\\: array\\<string, mixed\\>, classGroups\\: array\\<string, mixed\\>, conflictingClassGroups\\: array\\<string, array\\<int, string\\>\\>, conflictingClassGroupModifiers\\: array\\<string, array\\<int, string\\>\\>\\}, array given\\.$#"
-			count: 1
-			path: src/Support/TailwindClassParser.php
-
-		-
-			message: "#^Cannot access offset string on mixed\\.$#"
+			message: '#^Parameter \#1 \$classGroup of static method TailwindMerge\\Support\\ClassMap\:\:processClassesRecursively\(\) expects array, mixed given\.$#'
+			identifier: argument.type
 			count: 3
-			path: src/TailwindMerge.php
+			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\TailwindMerge\\:\\:getConflictingClassGroupIds\\(\\) should return array\\<string\\> but returns array\\<int\\|string, mixed\\>\\.$#"
+			message: '#^Parameter \#2 \$path of static method TailwindMerge\\Support\\ClassMap\:\:getPart\(\) expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/TailwindMerge.php
+			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Method TailwindMerge\\\\TailwindMerge\\:\\:getConflictingClassGroupIds\\(\\) should return array\\<string\\> but returns mixed\\.$#"
+			message: '#^Parameter \$validator of class TailwindMerge\\ValueObjects\\ClassValidatorObject constructor expects Closure, callable\(\)\: mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/TailwindMerge.php
+			path: src/Support/ClassMap.php
 
 		-
-			message: "#^Only iterables can be unpacked, mixed given\\.$#"
+			message: '#^Parameter \#2 \$array of function implode expects array\<string\>, array\<TKey of \(int\|string\), TValue\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/Collection.php
+
+		-
+			message: '#^Property TailwindMerge\\Support\\Collection\<TKey of \(int\|string\),TValue\>\:\:\$items \(array\<TKey of \(int\|string\), TValue\>\) does not accept array\<TValue\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Support/Collection.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/Support/Config.php
+
+		-
+			message: '#^Cannot access offset \(int\|string\) on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Support/Config.php
+
+		-
+			message: '#^Method TailwindMerge\\Support\\Config\:\:mergePropertyRecursively\(\) has parameter \$baseConfig with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Support/Config.php
+
+		-
+			message: '#^Method TailwindMerge\\Support\\Config\:\:mergePropertyRecursively\(\) has parameter \$mergeValue with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Support/Config.php
+
+		-
+			message: '#^Method TailwindMerge\\Support\\Config\:\:mergePropertyRecursively\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Support/Config.php
+
+		-
+			message: '#^Method TailwindMerge\\Support\\Config\:\:mergePropertyRecursively\(\) should return array\|bool\|float\|int\|string\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Support/Config.php
+
+		-
+			message: '#^Parameter \#1 \$baseConfig of static method TailwindMerge\\Support\\Config\:\:mergePropertyRecursively\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/Config.php
+
+		-
+			message: '#^Parameter \#3 \$mergeValue of static method TailwindMerge\\Support\\Config\:\:mergePropertyRecursively\(\) expects array\|bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Support/Config.php
+
+		-
+			message: '#^Method TailwindMerge\\Support\\Stringable\:\:split\(\) should return TailwindMerge\\Support\\Collection\<int, string\> but returns TailwindMerge\\Support\\Collection\<int, array\{string, int\<0, max\>\}\|string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Support/Stringable.php
+
+		-
+			message: '#^Method TailwindMerge\\Support\\TailwindClassParser\:\:__construct\(\) has parameter \$configuration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Support/TailwindClassParser.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$config$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Support/TailwindClassParser.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method TailwindMerge\\Support\\Collection\<\(int\|string\),TailwindMerge\\ValueObjects\\ClassValidatorObject\>\:\:first\(\) expects \(callable\(TailwindMerge\\ValueObjects\\ClassValidatorObject, int\|string\)\: bool\)\|null, Closure\(TailwindMerge\\ValueObjects\\ClassValidatorObject\)\: mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/TailwindClassParser.php
+
+		-
+			message: '#^Parameter \#1 \$config of static method TailwindMerge\\Support\\ClassMap\:\:create\(\) expects array\{cacheSize\: int, prefix\: string\|null, theme\: array\<string, mixed\>, classGroups\: array\<string, mixed\>, conflictingClassGroups\: array\<string, array\<int, string\>\>, conflictingClassGroupModifiers\: array\<string, array\<int, string\>\>\}, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/TailwindClassParser.php
+
+		-
+			message: '#^Possibly invalid array key type string\|null\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Support/TailwindClassParser.php
+
+		-
+			message: '#^Cannot access offset string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
 			path: src/TailwindMerge.php
+
+		-
+			message: '#^Method TailwindMerge\\TailwindMerge\:\:getConflictingClassGroupIds\(\) should return array\<string\> but returns array\<mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/TailwindMerge.php
+
+		-
+			message: '#^Method TailwindMerge\\TailwindMerge\:\:getConflictingClassGroupIds\(\) should return array\<string\> but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/TailwindMerge.php
+
+		-
+			message: '#^Method TailwindMerge\\TailwindMerge\:\:withCache\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 2
+			path: src/TailwindMerge.php
+
+		-
+			message: '#^Only iterables can be unpacked, mixed given\.$#'
+			identifier: arrayUnpacking.nonIterable
+			count: 2
+			path: src/TailwindMerge.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\ArbitraryImageValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/ArbitraryImageValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/ArbitraryImageValidator.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\ArbitraryLengthValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/ArbitraryLengthValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/ArbitraryLengthValidator.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\ArbitraryNumberValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/ArbitraryNumberValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/ArbitraryNumberValidator.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\ArbitraryPositionValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/ArbitraryPositionValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/ArbitraryPositionValidator.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\ArbitraryShadowValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/ArbitraryShadowValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/ArbitraryShadowValidator.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\ArbitrarySizeValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/ArbitrarySizeValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/ArbitrarySizeValidator.php
+
+		-
+			message: '#^Method TailwindMerge\\Validators\\IntegerValidator\:\:getIsArbitraryValue\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Validators/IntegerValidator.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, ''''\|''0'', non\-empty\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Validators/IntegerValidator.php
