@@ -2,13 +2,14 @@
 
 namespace TailwindMerge\Validators;
 
+use TailwindMerge\Contracts\ValidatorContract;
 use TailwindMerge\Support\Collection;
 use TailwindMerge\Support\Str;
 
 /**
  * @internal
  */
-class LengthValidator implements \TailwindMerge\Contracts\ValidatorContract
+class LengthValidator implements ValidatorContract
 {
     final public const FRACTION_REGEX = '/^\d+\/\d+$/';
 

@@ -4,7 +4,7 @@ use Psr\SimpleCache\CacheInterface;
 use TailwindMerge\TailwindMerge;
 
 it('does cache the result', function () {
-    $cache = new FakeCache();
+    $cache = new FakeCache;
 
     $twMerge = TailwindMerge::factory()->withCache($cache)->make();
 

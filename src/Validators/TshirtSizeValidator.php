@@ -2,12 +2,13 @@
 
 namespace TailwindMerge\Validators;
 
+use TailwindMerge\Contracts\ValidatorContract;
 use TailwindMerge\Support\Str;
 
 /**
  * @internal
  */
-class TshirtSizeValidator implements \TailwindMerge\Contracts\ValidatorContract
+class TshirtSizeValidator implements ValidatorContract
 {
     final public const T_SHIRT_UNIT_REGEX = '/^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/';
 
