@@ -23,7 +23,7 @@ class TailwindMerge implements TailwindMergeContract
      */
     public static function factory(): Factory
     {
-        return new Factory;
+        return new Factory();
     }
 
     /**
@@ -52,7 +52,7 @@ class TailwindMerge implements TailwindMergeContract
                 ->map(fn (string $class): ParsedClass => $parser->parse($class)) // @phpstan-ignore-line
                 ->reverse()
                 ->map(function (ParsedClass $class) use (&$conflictingClassGroups): ?string {
-                    $classId = $class->modifierId.$class->classGroupId;
+                    $classId = $class->modifierId . $class->classGroupId;
 
                     if (array_key_exists($classId, $conflictingClassGroups)) {
                         return null;
@@ -61,7 +61,7 @@ class TailwindMerge implements TailwindMergeContract
                     $conflictingClassGroups[$classId] = true;
 
                     foreach ($this->getConflictingClassGroupIds($class->classGroupId, $class->hasPostfixModifier) as $group) {
-                        $conflictingClassGroups[$class->modifierId.$group] = true;
+                        $conflictingClassGroups[$class->modifierId . $group] = true;
                     }
 
                     return $class->originalClassName;
@@ -92,7 +92,7 @@ class TailwindMerge implements TailwindMergeContract
             return $callback($input);
         }
 
-        $key = hash('xxh3', 'tailwind-merge-'.$input);
+        $key = hash('xxh3', 'tailwind-merge-' . $input);
 
         if ($this->cache->has($key)) {
             $cachedValue = $this->cache->get($key);
