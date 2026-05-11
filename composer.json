@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "^8.2.0",
-        "psr/simple-cache": "^3.0"
+        "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "laravel/pint": "^1.13.8",
